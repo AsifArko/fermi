@@ -58,45 +58,34 @@ This is a e-learning platform built with [Next.js](https://nextjs.org). The proj
 - Sanity Account
 - Stripe Account
 
-```
-
 Run `cp .env.example .env.local` and then follow the further instrusctions to update the values of environment variables. Example
 
 ```
-
 # Sanity
-
 NEXT_PUBLIC_SANITY_PROJECT_ID=your-project-id
 NEXT_PUBLIC_SANITY_DATASET=production
 
 # Read Token
-
 SANITY_API_TOKEN=your-sanity-read-token
 
 # Full Access Admin Token
-
 SANITY_API_ADMIN_TOKEN=your-sanity-admin-token
 
 # For Sanity Studio to read
-
 SANITY_STUDIO_PROJECT_ID=your-project-id
 SANITY_STUDIO_DATASET=production
 
-# Next
-
+# Next.js
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 
 # Stripe
-
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your-stripe-publishable-key
 STRIPE_SECRET_KEY=your-stripe-secret-key
 STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
 
 # Clerk
-
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
 CLERK_SECRET_KEY=your-clerk-secret-key
-
 ```
 
 ## Get Clerk environment variables
@@ -142,7 +131,6 @@ Students portal: [localhost:3000](http://localhost:3000)
 
 Install the vercel cli with `npm i -g vercel` then login to your vercel account with `vercel login`. Then in the browser go to [Vercel](https://vercel.com/), create a vercel project.
 Go to `https://vercel.com/your-project/settings/environment-variables` and add your environment variables to your project. Then finally you can deply with `vercel`. You can see the deployments at https://vercel.com/your-project/deployments. The deployed url should have the following signature `https://your-project.vercel.app/`.
-
 
 ## Architecture
 
@@ -301,4 +289,3 @@ The `Mark as Complete` button toggle and the respective sidebar component update
 ## Todo
 
 Fix the button issue first, then may be work on the structure tool. The current one is not good enough for comprehensive content writing, clean up.
-```
