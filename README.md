@@ -88,11 +88,11 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your-clerk-publishable-key
 CLERK_SECRET_KEY=your-clerk-secret-key
 ```
 
-## Get Clerk environment variables
-
-Go to [clerk dashboard](https://dashboard.clerk.com/), create an clerk application, navigate to the application overview page. The url should look like this `https://dashboard.clerk.com/apps/app_id/instances/ins_id/api-keys`. Look for `API keys` in the `Configure` tab of the clerk application you've just created
+### Setting up Sanity CMS
 
 ## Get sanity environment variables and configuration information
+
+- Run `npm install -g @sanity/cli`
 
 - Go to [sanity.io](https://sanity.io) and create a sanity application. You should get the `project-id` dataset `production` by default, after creating the project in sanity.io.
 
@@ -104,7 +104,17 @@ Go to [clerk dashboard](https://dashboard.clerk.com/), create an clerk applicati
 
 - Create `READ_ONLY_TOKEN` with `Viewer` permission and set that token to SANITY_API_TOKEN environment variable.
 
-If you update sanity schemas and libraries located in `/src/sanity/`, you need to run `npm run typegen` to sync your latest changes with the sanity dashboard on the browser.
+- Go to [sanity.io](https://sanity.io) and create a sanity application. You should get the `project-id` dataset `production` by default, after creating the project in sanity.io. To do a fresh install of the sanity backend in the source code you need to run `npm create sanity@latest -- --project project-id --dataset production --template clean`. Sanity backend files are placed in `src/sanity`. To login to sanity backend with CLI run `sanity login` and run `sanity manage` to go to the project console in the browser. Go to https://www.sanity.io/organizations/organization-id/project/project-id/api, create `ADMIN_TOKEN` with `Editor` permission and set that token to `SANITY_API_ADMIN_TOKEN` environment variable.
+
+- Then create `READ_ONLY_TOKEN` with `Viewer` permission and set that token to SANITY_API_TOKEN environment variable. If you update sanity schemas and libraries located in `/src/sanity/`.
+
+- Run `npm run typegen` to sync your latest changes with the sanity dashboard on the browser.
+
+- Run `sanity deploy` to deploy the changes to sanity library.
+
+## Get Clerk environment variables
+
+- Go to [clerk dashboard](https://dashboard.clerk.com/), create an clerk application, navigate to the application overview page. The url should look like this `https://dashboard.clerk.com/apps/app_id/instances/ins_id/api-keys`. Look for `API keys` in the `Configure` tab of the clerk application you've just created. Add redirect url and add clerk environment variables.
 
 ## Get stripe environment variables and configuration information
 
@@ -122,7 +132,7 @@ Install the dependencies with `npm install`
 
 ## Run the application
 
-To build the application run `npm run build` and start the application with `npm start`. Use `npm run dev` to run the application in dev mode.
+To build the application run `npm run build` and start the application with `npm start`. Use `npm run dev` to run the application in dev mode. Run `npm run sanity:dev` to start sanity studio.
 
 Teachers portal: [localhost:3000/studio](http://localhost:3000/studio)
 Students portal: [localhost:3000](http://localhost:3000)
