@@ -50,4 +50,5 @@
   WORKDIR /app
   COPY --from=base /app ./
   EXPOSE 3333
-  CMD ["npm", "run", "dev", "--workspace=src/app/(admin)/studio"]
+  # IMPORTANT: Use npx sanity start with the correct path to your studio
+  CMD ["npx", "sanity", "start", "src/app/(admin)/studio"]

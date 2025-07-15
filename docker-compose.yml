@@ -21,7 +21,6 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=production
-    # Optionally mount your local env file at runtime as well
     volumes:
       - .env.local:/app/.env.local
 
@@ -33,6 +32,5 @@ services:
       - "3333:3333"
     environment:
       - NODE_ENV=production
-    # Optionally mount your local env file at runtime as well
     volumes:
       - .env.local:/app/.env.local
