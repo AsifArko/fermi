@@ -66,7 +66,7 @@ const Footer = () => {
             Contact
           </a>
           <a
-            href="/privacy"
+            href="/privacy-policy"
             className="hover:text-primary transition-colors text-muted-foreground"
           >
             Privacy Policy

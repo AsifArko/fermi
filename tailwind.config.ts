@@ -73,10 +73,16 @@ export default {
             height: "0",
           },
         },
-      },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        // Custom for Contact page
+        "spin-slower": "spin-slower 16s linear infinite",
+        "spin-reverse-slower": "spin-reverse-slower 22s linear infinite",
+        orbit1: "orbit1 6s linear infinite",
+        orbit2: "orbit2 8s linear infinite",
+        orbit3: "orbit3 10s linear infinite",
+        orbit4: "orbit4 12s linear infinite",
       },
     },
   },

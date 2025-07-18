@@ -9,7 +9,7 @@ function Hero() {
         {/* Large floating circles */}
         <div
           className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/5 rounded-full animate-pulse"
-          style={{ animationDuration: "4s" }}
+          style={{ animationDuration: "12s" }}
         ></div>
         <div
           className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-secondary/5 rounded-full animate-pulse"
@@ -17,25 +17,25 @@ function Hero() {
         ></div>
         <div
           className="absolute top-1/2 right-1/3 w-16 h-16 bg-primary/3 rounded-full animate-pulse"
-          style={{ animationDuration: "5s", animationDelay: "2s" }}
+          style={{ animationDuration: "3s", animationDelay: "1s" }}
         ></div>
 
         {/* Small floating dots */}
         <div
           className="absolute top-1/3 left-1/3 w-2 h-2 bg-primary/20 rounded-full animate-bounce"
-          style={{ animationDuration: "3s" }}
+          style={{ animationDuration: "6s" }}
         ></div>
         <div
           className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-secondary/30 rounded-full animate-bounce"
-          style={{ animationDuration: "4s", animationDelay: "0.5s" }}
+          style={{ animationDuration: "3s", animationDelay: "0.5s" }}
         ></div>
         <div
           className="absolute top-2/3 left-1/2 w-1 h-1 bg-primary/40 rounded-full animate-bounce"
-          style={{ animationDuration: "2.5s", animationDelay: "1.5s" }}
+          style={{ animationDuration: "1.5s", animationDelay: "1.5s" }}
         ></div>
         <div
           className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-secondary/25 rounded-full animate-bounce"
-          style={{ animationDuration: "3.5s", animationDelay: "1s" }}
+          style={{ animationDuration: "2.5s", animationDelay: "1s" }}
         ></div>
 
         {/* Geometric shapes */}
@@ -45,7 +45,7 @@ function Hero() {
         ></div>
         <div
           className="absolute bottom-1/4 left-1/3 w-6 h-6 border border-secondary/15 rotate-45 animate-spin"
-          style={{ animationDuration: "25s", animationDirection: "reverse" }}
+          style={{ animationDuration: "15s", animationDirection: "reverse" }}
         ></div>
       </div>
 
@@ -53,10 +53,10 @@ function Hero() {
         <div className="max-w-4xl">
           {/* Main heading with enhanced animation */}
           <div className="relative">
-            <h1 className="text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground via-foreground/90 to-primary/80 bg-clip-text text-transparent animate-in slide-in-from-bottom-8 duration-1200">
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-foreground via-foreground/90 to-primary/80 bg-clip-text text-transparent animate-in slide-in-from-bottom-4 duration-[2500ms] ease-in-out">
               Advance Your Knowledge
             </h1>
-            <h1 className="text-4xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-primary/80 via-primary to-foreground bg-clip-text text-transparent animate-in slide-in-from-bottom-8 duration-1200 delay-200">
+            <h1 className="text-4xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-primary/80 via-primary to-foreground bg-clip-text text-transparent animate-in slide-in-from-bottom-4 duration-[2500ms] ease-in-out delay-200">
               with Fermi
             </h1>
 
@@ -86,14 +86,14 @@ function Hero() {
           </p>
 
           {/* Call to action with enhanced styling */}
-          <div className="flex flex-col sm:flex-row gap-4 animate-in slide-in-from-bottom-4 duration-1000 delay-700">
-            <button className="px-8 py-3 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold rounded-lg hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+          <div className="flex flex-col sm:flex-row gap-4 animate-in slide-in-from-bottom-4 duration-[2000ms] ease-in-out delay-700">
+            <button className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold rounded-lg hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
               Explore Courses
             </button>
 
-            <Link href="/about">
-              <button className="px-8 py-3 border border-primary/30 text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300">
-                Learn More
+            <Link href="/about" className="w-full sm:w-auto">
+              <button className="w-full sm:w-auto px-8 py-3 border border-primary/30 text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300">
+                About us
               </button>
             </Link>
           </div>
