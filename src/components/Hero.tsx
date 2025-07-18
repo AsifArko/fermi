@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 function Hero() {
   return (
@@ -89,9 +90,12 @@ function Hero() {
             <button className="px-8 py-3 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground font-semibold rounded-lg hover:from-primary/90 hover:to-primary transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
               Explore Courses
             </button>
-            <button className="px-8 py-3 border border-primary/30 text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300">
-              Learn More
-            </button>
+
+            <Link href="/about">
+              <button className="px-8 py-3 border border-primary/30 text-primary font-semibold rounded-lg hover:bg-primary/10 transition-all duration-300">
+                Learn More
+              </button>
+            </Link>
           </div>
         </div>
       </div>

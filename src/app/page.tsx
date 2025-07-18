@@ -12,7 +12,7 @@ export default async function Home() {
       <div className="container mx-auto px-4">
         <div className="flex items-center gap-4 py-8">
           <div className="h-px flex-1 bg-gradient-to-r from-border/0 via-border to-border/0" />
-          <span className="text-sm font-medium text-muted-foreground">
+          <span className="text-sm font-semibold tracking-wide px-4 py-1 rounded-full bg-accent/60 border border-border shadow-sm text-accent-foreground backdrop-blur">
             Featured Courses
           </span>
           <div className="h-px flex-1 bg-gradient-to-r from-border/0 via-border to-border/0" />
