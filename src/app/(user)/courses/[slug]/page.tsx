@@ -8,59 +8,64 @@ import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
 import { auth } from "@clerk/nextjs/server";
 
 // --- Animated scientific background shapes (copied from Hero) ---
-function AnimatedBackground() {
+function TriangleShape() {
   return (
-    <>
-      {/* Large floating circles */}
-      <div
-        className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/5 rounded-full animate-pulse"
-        style={{ animationDuration: "12s" }}
-      />
-      <div
-        className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-secondary/5 rounded-full animate-pulse"
-        style={{ animationDuration: "6s", animationDelay: "1s" }}
-      />
-      {/* Small floating dots */}
-      <div
-        className="absolute top-1/3 left-1/3 w-2 h-2 bg-primary/20 rounded-full animate-bounce"
-        style={{ animationDuration: "6s" }}
-      />
-      <div
-        className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-secondary/30 rounded-full animate-bounce"
-        style={{ animationDuration: "3s", animationDelay: "0.5s" }}
-      />
-      {/* Geometric shapes */}
-      <div
-        className="absolute top-1/4 right-1/4 w-8 h-8 border border-primary/10 rotate-45 animate-spin"
-        style={{ animationDuration: "20s" }}
-      />
-      <div
-        className="absolute bottom-1/4 left-1/3 w-6 h-6 border border-secondary/15 rotate-45 animate-spin"
-        style={{ animationDuration: "15s", animationDirection: "reverse" }}
-      />
-      {/* Tech icon example (Qubit) */}
-      <div
-        className="absolute opacity-15 animate-float"
-        style={{
-          top: "35%",
-          right: "25%",
-          animationDuration: "7s",
-          animationDelay: "0.5s",
-          filter: "blur(0.5px)",
-        }}
-      >
-        <svg
-          className="w-9 h-9 text-primary/60"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <circle cx="12" cy="12" r="7" strokeWidth="1.5" />
-          <path d="M12 5v14M5 12h14" strokeWidth="1.5" />
-          <circle cx="12" cy="12" r="2" fill="currentColor" />
-        </svg>
-      </div>
-    </>
+    <div
+      className="absolute bottom-4 right-4 z-20 opacity-50 animate-float"
+      style={{ width: "48px", height: "48px", animationDuration: "8s" }}
+    >
+      <svg viewBox="0 0 100 100" className="w-full h-full">
+        <polygon
+          points="50,10 90,90 10,90"
+          fill="currentColor"
+          className="text-primary/30"
+        />
+      </svg>
+    </div>
+  );
+}
+
+function RectangleShape({
+  position = "top-right",
+}: {
+  position?: "top-right" | "bottom-right";
+}) {
+  const base = "absolute z-20 opacity-40 animate-float";
+  const posClass =
+    position === "top-right" ? "top-4 right-4" : "bottom-4 right-4";
+  return (
+    <div
+      className={`${base} ${posClass}`}
+      style={{ width: "60px", height: "32px", animationDuration: "10s" }}
+    >
+      <svg viewBox="0 0 100 50" className="w-full h-full">
+        <rect
+          x="5"
+          y="5"
+          width="90"
+          height="40"
+          rx="10"
+          fill="currentColor"
+          className="text-secondary/30"
+        />
+      </svg>
+    </div>
+  );
+}
+
+// Add GridOverlay component for subtle gridlines
+function GridOverlay() {
+  return (
+    <div
+      className="absolute inset-0 pointer-events-none z-0"
+      aria-hidden="true"
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 0H0V40' stroke='%239CA3AF33' stroke-width='1'/%3E%3Cpath d='M20 0V40' stroke='%239CA3AF22' stroke-width='0.5'/%3E%3Cpath d='M0 20H40' stroke='%239CA3AF22' stroke-width='0.5'/%3E%3C/svg%3E\")",
+        backgroundSize: "40px 40px",
+        opacity: 0.35,
+      }}
+    />
   );
 }
 
@@ -102,7 +107,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
         </Link>
       </div>
       {/* Hero Section */}
-      <div className="relative h-[56vh] w-full overflow-hidden shadow-lg mt-4 pt-20 md:pt-0">
+      <div className="relative h-[56vh] w-full overflow-hidden shadow-lg mt-4 pt-20 md:pt-0 rounded-b-lg">
         {course.image && (
           <Image
             src={urlFor(course.image).url() || ""}
@@ -115,8 +120,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
         {/* --- DO NOT REMOVE: Transparent overlay for contrast --- */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/10 backdrop-blur-sm" />
         {/* --- Animated scientific background shapes --- */}
-        <div className="absolute inset-0 pointer-events-none z-10">
-          <AnimatedBackground />
+        <div className="absolute inset-0 pointer-events-none z-20">
+          {/* Removed AnimatedBackground */}
         </div>
         <div className="absolute inset-0 flex flex-col justify-end items-center pb-12 z-20">
           <div className="w-full px-4 md:px-8">
@@ -147,14 +152,12 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
       {/* Content Section */}
       <div className="relative py-16 px-4 md:px-8">
-        {/* Subtle animated background shapes in content area */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          <AnimatedBackground />
-        </div>
         <div className="relative grid grid-cols-1 lg:grid-cols-3 gap-12 z-10">
           {/* Main Content */}
-          <div className="lg:col-span-2">
-            <div className="bg-card rounded-lg p-8 mb-8 border border-border shadow-2xl">
+          <div className="lg:col-span-2 relative">
+            <div className="bg-card rounded-lg p-8 mb-8 border border-border shadow-2xl relative overflow-hidden">
+              {/* Subtle grid overlay */}
+              <GridOverlay />
               <h2 className="text-2xl font-semibold mb-8 tracking-tight text-foreground">
                 Course Content
               </h2>
@@ -194,8 +197,10 @@ export default async function CoursePage({ params }: CoursePageProps) {
           </div>
 
           {/* Sidebar */}
-          <div>
-            <div className="bg-gradient-to-br from-card/80 via-background/70 to-card/90 rounded-xl p-8 sticky top-4 border border-primary/10 shadow-2xl backdrop-blur-md">
+          <div className="relative">
+            <div className="bg-gradient-to-br from-card/80 via-background/70 to-card/90 rounded-xl p-8 sticky top-4 border border-primary/10 shadow-2xl backdrop-blur-md relative overflow-visible">
+              {/* Rectangle shape at top right */}
+              <RectangleShape position="top-right" />
               <h2 className="text-lg font-semibold mb-5 tracking-wide text-primary">
                 Instructor
               </h2>

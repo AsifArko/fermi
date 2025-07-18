@@ -5,8 +5,10 @@ import { usePathname } from "next/navigation";
 const Footer = () => {
   const pathname = usePathname();
   const hideFooter =
-    pathname?.includes("/dashboard/courses/") &&
-    pathname?.includes("/lessons/");
+    pathname?.includes("/dashboard/courses/") ||
+    pathname?.includes("/lessons/") ||
+    pathname?.includes("/studio/") ||
+    pathname?.includes("/studio/structure");
   if (hideFooter) return null;
 
   return (

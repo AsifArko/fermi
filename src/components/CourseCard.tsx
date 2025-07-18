@@ -21,7 +21,7 @@ export function CourseCard({ course, progress, href }: CourseCardProps) {
       prefetch={false}
       className="group hover:no-underline block"
     >
-      <div className="relative bg-gradient-to-br from-card via-card to-card/80 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary/10 hover:translate-y-[-8px] border border-border/50 hover:border-primary/20 group-hover:bg-gradient-to-br group-hover:from-card group-hover:via-card/95 group-hover:to-primary/5">
+      <div className="relative h-[500px] md:h-[540px] bg-gradient-to-br from-card via-card to-card/80 rounded-2xl overflow-hidden shadow-lg transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary/10 hover:translate-y-[-8px] border border-border/50 hover:border-primary/20 group-hover:bg-gradient-to-br group-hover:from-card group-hover:via-card/95 group-hover:to-primary/5">
         {/* Floating background elements */}
         <div className="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
           {/* Floating particles */}
