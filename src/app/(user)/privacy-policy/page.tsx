@@ -88,7 +88,7 @@ export default function PrivacyPolicyPage() {
             </div>
             <div className="prose prose-gray dark:prose-invert max-w-none">
               <p className="text-lg text-muted-foreground leading-relaxed">
-                This Privacy Policy explains how Fermi ("we", "us", or "our")
+                This Privacy Policy explains how Fermi ('we', 'us', or 'our')
                 collects, uses, discloses, and safeguards your information when
                 you use our platform. By accessing or using Fermi, you agree to
                 the terms of this Privacy Policy.
