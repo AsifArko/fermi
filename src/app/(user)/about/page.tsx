@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About - Fermi",
@@ -132,7 +133,7 @@ export default function AboutPage() {
                 everyone, everywhere. Our platform is dedicated to providing
                 high-quality, expert-led courses in cutting-edge technologies
                 that are shaping the future. From quantum computing to machine
-                learning, we're committed to helping learners advance their
+                learning, we are committed to helping learners advance their
                 skills and accelerate their careers.
               </p>
             </div>
@@ -306,12 +307,12 @@ export default function AboutPage() {
               mastering cutting-edge technologies.
             </p>
             <div className="flex justify-center">
-              <a
+              <Link
                 href="/"
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-md font-medium hover:bg-primary/90 transition-colors"
               >
                 Browse Courses
-              </a>
+              </Link>
             </div>
           </section>
         </div>

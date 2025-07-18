@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { BookOpen, Play, GraduationCap } from "lucide-react";
+import { Play, GraduationCap } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import { Loader } from "@/components/ui/loader";
 import { GetCoursesQueryResult } from "../../sanity.types";
