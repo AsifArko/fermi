@@ -1,6 +1,6 @@
-import getCourseById from "@/sanity/lib/courses/getCourseById";
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
+import getCourseById from '@/sanity/lib/courses/getCourseById';
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
 
 interface CoursePageProps {
   params: Promise<{
@@ -14,7 +14,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   const course = await getCourseById(courseId);
 
   if (!course || !user) {
-    return redirect("/");
+    return redirect('/');
   }
 
   // Redirect to the first lesson of the first module if available

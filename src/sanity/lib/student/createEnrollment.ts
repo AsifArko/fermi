@@ -1,4 +1,4 @@
-import { client } from "../adminClient";
+import { client } from '../adminClient';
 
 interface CreateEnrollmentParams {
   studentId: string;
@@ -14,13 +14,13 @@ export async function createEnrollment({
   amount,
 }: CreateEnrollmentParams) {
   const enrollment = await client.create({
-    _type: "enrollment",
+    _type: 'enrollment',
     student: {
-      _type: "reference",
+      _type: 'reference',
       _ref: studentId,
     },
     course: {
-      _type: "reference",
+      _type: 'reference',
       _ref: courseId,
     },
     paymentId,

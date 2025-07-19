@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { completeLessonById } from "@/sanity/lib/lessons/completeLessonById";
+import { completeLessonById } from '@/sanity/lib/lessons/completeLessonById';
 
 export async function completeLessonAction(
   lessonId: string,
@@ -9,7 +9,7 @@ export async function completeLessonAction(
   try {
     await completeLessonById({ lessonId, clerkId });
   } catch (error) {
-    console.error("Error completing lesson:", error);
+    console.error('Error completing lesson:', error);
     throw error;
   }
 }

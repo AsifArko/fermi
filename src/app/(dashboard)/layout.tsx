@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { ClerkProvider } from "@clerk/nextjs";
-import { SanityLive } from "@/sanity/lib/live";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { SidebarProvider } from "@/components/providers/SidebarProvider";
+import type { Metadata } from 'next';
+import { ClerkProvider } from '@clerk/nextjs';
+import { SanityLive } from '@/sanity/lib/live';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import { SidebarProvider } from '@/components/providers/SidebarProvider';
 
 export const metadata: Metadata = {
-  title: "Dashboard",
-  description: "Course dashboard",
+  title: 'Dashboard',
+  description: 'Course dashboard',
 };
 
 export default function DashboardLayout({
@@ -27,7 +27,7 @@ export default function DashboardLayout({
         </SidebarProvider>
       </ThemeProvider>
 
-      {process.env.NODE_ENV === "development" && <SanityLive />}
+      {process.env.NODE_ENV === 'development' && <SanityLive />}
     </ClerkProvider>
   );
 }

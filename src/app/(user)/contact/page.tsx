@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import React from "react";
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import React from 'react';
 
 export const metadata: Metadata = {
-  title: "Contact - Fermi",
-  description: "Contact Fermi for support, feedback, or partnership inquiries.",
+  title: 'Contact - Fermi',
+  description: 'Contact Fermi for support, feedback, or partnership inquiries.',
 };
 
 export default function ContactPage() {
@@ -19,7 +19,7 @@ export default function ContactPage() {
               className="absolute inset-0"
               style={{
                 backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
+                backgroundSize: '40px 40px',
               }}
             ></div>
           </div>
@@ -27,11 +27,11 @@ export default function ContactPage() {
           <div className="absolute inset-0">
             <div
               className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-pulse"
-              style={{ animationDuration: "4s" }}
+              style={{ animationDuration: '4s' }}
             ></div>
             <div
               className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse"
-              style={{ animationDelay: "2s", animationDuration: "4s" }}
+              style={{ animationDelay: '2s', animationDuration: '4s' }}
             ></div>
           </div>
           <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
@@ -50,13 +50,13 @@ export default function ContactPage() {
           {/* Floating Tech Icons (optional, for extra polish) */}
           <div
             className="absolute top-1/4 right-1/4 opacity-10 animate-float"
-            style={{ animationDuration: "6s" }}
+            style={{ animationDuration: '6s' }}
           >
             {/* ...SVG icon from About page... */}
           </div>
           <div
             className="absolute bottom-1/4 left-1/4 opacity-10 animate-float"
-            style={{ animationDelay: "3s", animationDuration: "8s" }}
+            style={{ animationDelay: '3s', animationDuration: '8s' }}
           >
             {/* ...SVG icon from About page... */}
           </div>
@@ -222,7 +222,7 @@ export default function ContactPage() {
                     <div>
                       <span className="font-medium text-foreground">
                         Email:
-                      </span>{" "}
+                      </span>{' '}
                       <a
                         href="mailto:support@fermi.com"
                         className="underline text-primary hover:text-primary/80 transition-colors"
@@ -233,13 +233,13 @@ export default function ContactPage() {
                     <div>
                       <span className="font-medium text-foreground">
                         Address:
-                      </span>{" "}
+                      </span>{' '}
                       123 Science Ave, Quantum City, 12345
                     </div>
                     <div>
                       <span className="font-medium text-foreground">
                         Business Hours:
-                      </span>{" "}
+                      </span>{' '}
                       Mon - Fri, 9:00am - 6:00pm (UTC)
                     </div>
                   </div>

@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { createStripeCheckout } from "@/actions/createStripeCheckout";
-import { useUser } from "@clerk/nextjs";
-import { CheckCircle } from "lucide-react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useTransition } from "react";
-import { loadStripe } from "@stripe/stripe-js";
+import { createStripeCheckout } from '@/actions/createStripeCheckout';
+import { useUser } from '@clerk/nextjs';
+import { CheckCircle } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useTransition } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 
 // Initialize Stripe
 const stripePromise = loadStripe(
@@ -27,8 +27,8 @@ function EnrollButton({
 
   // Check for successful payment and refresh the page
   useEffect(() => {
-    const paymentSuccess = searchParams.get("success");
-    if (paymentSuccess === "true") {
+    const paymentSuccess = searchParams.get('success');
+    if (paymentSuccess === 'true') {
       router.refresh();
     }
   }, [searchParams, router]);
@@ -41,7 +41,7 @@ function EnrollButton({
 
         const stripe = await stripePromise;
         if (!stripe) {
-          throw new Error("Stripe failed to initialize");
+          throw new Error('Stripe failed to initialize');
         }
 
         const { url } = await createStripeCheckout(courseId, userId);
@@ -49,7 +49,7 @@ function EnrollButton({
           router.push(url);
         }
       } catch (error) {
-        console.error("Failed to create checkout session");
+        console.error('Failed to create checkout session');
         throw error;
       }
     });
@@ -84,19 +84,19 @@ function EnrollButton({
       className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
         ${
           isPending || !user?.id
-            ? "bg-gray-100 text-gray-400 cursor-not-allowed hover:scale-100"
-            : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
+            ? 'bg-gray-100 text-gray-400 cursor-not-allowed hover:scale-100'
+            : 'bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10'
         }
       `}
       disabled={!user?.id || isPending}
       onClick={() => handleEnroll(courseId)}
     >
       {!user?.id ? (
-        <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
+        <span className={`${isPending ? 'opacity-0' : 'opacity-100'}`}>
           Sign in to Enroll
         </span>
       ) : (
-        <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
+        <span className={`${isPending ? 'opacity-0' : 'opacity-100'}`}>
           Enroll Now
         </span>
       )}

@@ -1,15 +1,15 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
-import { getStudentByClerkId } from "../student/getStudentByClerkId";
-import { Module } from "@/sanity.types";
-import { calculateCourseProgress } from "@/lib/courseProgress";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
+import { getStudentByClerkId } from '../student/getStudentByClerkId';
+import { Module } from '@/sanity.types';
+import { calculateCourseProgress } from '@/lib/courseProgress';
 
 export async function getCourseProgress(clerkId: string, courseId: string) {
   // First get the student's Sanity ID
   const student = await getStudentByClerkId(clerkId);
 
   if (!student?._id) {
-    throw new Error("Student not found");
+    throw new Error('Student not found');
   }
 
   const progressQuery = defineQuery(`{

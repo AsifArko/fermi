@@ -1,8 +1,8 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
-import { BookOpen, User, Sun } from "lucide-react";
-import DarkModeToggle from "./DarkModeToggle";
-import { Button } from "./ui/button";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+import { BookOpen, User, Sun } from 'lucide-react';
+import DarkModeToggle from './DarkModeToggle';
+import { Button } from './ui/button';
 
 export default function MobileSidebar({
   open,

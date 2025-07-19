@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { Play, GraduationCap } from "lucide-react";
-import { urlFor } from "@/sanity/lib/image";
-import { Loader } from "@/components/ui/loader";
-import { GetCoursesQueryResult } from "../../sanity.types";
-import { CourseProgress } from "./CourseProgress";
+import Image from 'next/image';
+import Link from 'next/link';
+import { Play, GraduationCap } from 'lucide-react';
+import { urlFor } from '@/sanity/lib/image';
+import { Loader } from '@/components/ui/loader';
+import { GetCoursesQueryResult } from '../../sanity.types';
+import { CourseProgress } from './CourseProgress';
 
 interface CourseCardProps {
   course: GetCoursesQueryResult[number];
@@ -23,7 +23,7 @@ export function CourseCard({
   showProgressFirst,
   cardHeight,
 }: CourseCardProps) {
-  const heightClass = cardHeight || "h-[500px] md:h-[540px]";
+  const heightClass = cardHeight || 'h-[500px] md:h-[540px]';
   return (
     <Link
       href={href}
@@ -38,25 +38,25 @@ export function CourseCard({
           {/* Floating particles */}
           <div
             className="absolute top-4 right-4 w-2 h-2 bg-primary/30 rounded-full animate-pulse"
-            style={{ animationDuration: "3s" }}
+            style={{ animationDuration: '3s' }}
           ></div>
           <div
             className="absolute bottom-6 left-6 w-1 h-1 bg-secondary/40 rounded-full animate-pulse"
-            style={{ animationDuration: "4s", animationDelay: "1s" }}
+            style={{ animationDuration: '4s', animationDelay: '1s' }}
           ></div>
           <div
             className="absolute top-1/2 right-8 w-1.5 h-1.5 bg-primary/20 rounded-full animate-pulse"
-            style={{ animationDuration: "5s", animationDelay: "2s" }}
+            style={{ animationDuration: '5s', animationDelay: '2s' }}
           ></div>
 
           {/* Geometric shapes */}
           <div
             className="absolute top-6 right-6 w-4 h-4 border border-primary/10 rotate-45 animate-spin"
-            style={{ animationDuration: "20s" }}
+            style={{ animationDuration: '20s' }}
           ></div>
           <div
             className="absolute bottom-8 left-8 w-3 h-3 border border-secondary/15 rotate-45 animate-spin"
-            style={{ animationDuration: "25s", animationDirection: "reverse" }}
+            style={{ animationDuration: '25s', animationDirection: 'reverse' }}
           ></div>
         </div>
 
@@ -64,8 +64,8 @@ export function CourseCard({
         <div className="relative h-64 w-full overflow-hidden">
           {course.image ? (
             <Image
-              src={urlFor(course.image).url() || ""}
-              alt={course.title || "Course Image"}
+              src={urlFor(course.image).url() || ''}
+              alt={course.title || 'Course Image'}
               fill
               className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
             />
@@ -88,13 +88,13 @@ export function CourseCard({
           {/* Category and price badges with enhanced styling */}
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
             <span className="text-sm font-semibold px-4 py-2 bg-black/60 backdrop-blur-md text-white rounded-full border border-white/20 shadow-lg">
-              {course.category?.name || "Uncategorized"}
+              {course.category?.name || 'Uncategorized'}
             </span>
-            {"price" in course && typeof course.price === "number" && (
+            {'price' in course && typeof course.price === 'number' && (
               <span className="text-white font-bold px-4 py-2 bg-gradient-to-r from-primary/80 to-primary/60 backdrop-blur-md rounded-full border border-primary/30 shadow-lg">
                 {course.price === 0
-                  ? "Free"
-                  : `$${course.price.toLocaleString("en-US", {
+                  ? 'Free'
+                  : `$${course.price.toLocaleString('en-US', {
                       minimumFractionDigits: 2,
                     })}`}
               </span>
@@ -117,7 +117,7 @@ export function CourseCard({
           {/* Conditional rendering for progress and instructor order */}
           {showProgressFirst ? (
             <>
-              {typeof progress === "number" && (
+              {typeof progress === 'number' && (
                 <div className="mb-4">
                   <CourseProgress
                     progress={progress}
@@ -132,13 +132,13 @@ export function CourseCard({
                   className="relative flex items-center justify-between mb-4 p-3 rounded-xl border border-border/50 overflow-hidden group-hover:border-primary/20 transition-all duration-300"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--background), var(--primary)/10 80%)",
+                      'linear-gradient(135deg, var(--background), var(--primary)/10 80%)',
                   }}
                 >
                   {/* Softly pulsing ring SVG accent, top-left, non-overlapping */}
                   <svg
                     className="absolute top-2 left-2 w-5 h-5 opacity-10 animate-pulse-slow pointer-events-none"
-                    style={{ marginTop: "2px", marginLeft: "2px" }}
+                    style={{ marginTop: '2px', marginLeft: '2px' }}
                     viewBox="0 0 32 32"
                     fill="none"
                   >
@@ -154,8 +154,8 @@ export function CourseCard({
                     {course.instructor.photo ? (
                       <div className="relative h-10 w-10 mr-3">
                         <Image
-                          src={urlFor(course.instructor.photo).url() || ""}
-                          alt={course.instructor.name || "Instructor"}
+                          src={urlFor(course.instructor.photo).url() || ''}
+                          alt={course.instructor.name || 'Instructor'}
                           fill
                           className="rounded-full object-cover border-2 border-white/20 shadow-sm"
                         />
@@ -185,13 +185,13 @@ export function CourseCard({
                   className="relative flex items-center justify-between mb-4 p-3 rounded-xl border border-border/50 overflow-hidden group-hover:border-primary/20 transition-all duration-300"
                   style={{
                     background:
-                      "linear-gradient(135deg, var(--background), var(--primary)/10 80%)",
+                      'linear-gradient(135deg, var(--background), var(--primary)/10 80%)',
                   }}
                 >
                   {/* Softly pulsing ring SVG accent, top-left, non-overlapping */}
                   <svg
                     className="absolute top-2 left-2 w-5 h-5 opacity-10 animate-pulse-slow pointer-events-none"
-                    style={{ marginTop: "2px", marginLeft: "2px" }}
+                    style={{ marginTop: '2px', marginLeft: '2px' }}
                     viewBox="0 0 32 32"
                     fill="none"
                   >
@@ -207,8 +207,8 @@ export function CourseCard({
                     {course.instructor.photo ? (
                       <div className="relative h-10 w-10 mr-3">
                         <Image
-                          src={urlFor(course.instructor.photo).url() || ""}
-                          alt={course.instructor.name || "Instructor"}
+                          src={urlFor(course.instructor.photo).url() || ''}
+                          alt={course.instructor.name || 'Instructor'}
                           fill
                           className="rounded-full object-cover border-2 border-white/20 shadow-sm"
                         />
@@ -230,7 +230,7 @@ export function CourseCard({
                   <GraduationCap className="h-5 w-5 text-primary/80 group-hover:text-primary transition-colors duration-300 relative z-10" />
                 </div>
               )}
-              {typeof progress === "number" && (
+              {typeof progress === 'number' && (
                 <div className="mt-auto">
                   <CourseProgress
                     progress={progress}

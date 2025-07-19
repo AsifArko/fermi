@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "About - Fermi",
+  title: 'About - Fermi',
   description:
-    "Learn more about Fermi, the online learning platform advancing knowledge in technology and science.",
+    'Learn more about Fermi, the online learning platform advancing knowledge in technology and science.',
 };
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
             className="absolute inset-0"
             style={{
               backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-              backgroundSize: "40px 40px",
+              backgroundSize: '40px 40px',
             }}
           ></div>
         </div>
@@ -28,11 +28,11 @@ export default function AboutPage() {
         <div className="absolute inset-0">
           <div
             className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-pulse"
-            style={{ animationDuration: "4s" }}
+            style={{ animationDuration: '4s' }}
           ></div>
           <div
             className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse"
-            style={{ animationDelay: "2s", animationDuration: "4s" }}
+            style={{ animationDelay: '2s', animationDuration: '4s' }}
           ></div>
         </div>
 
@@ -54,7 +54,7 @@ export default function AboutPage() {
         {/* Floating Tech Icons */}
         <div
           className="absolute top-1/4 right-1/4 opacity-10 animate-float"
-          style={{ animationDuration: "6s" }}
+          style={{ animationDuration: '6s' }}
         >
           <svg
             className="w-8 h-8 text-primary"
@@ -73,7 +73,7 @@ export default function AboutPage() {
 
         <div
           className="absolute bottom-1/4 left-1/4 opacity-10 animate-float"
-          style={{ animationDelay: "3s", animationDuration: "8s" }}
+          style={{ animationDelay: '3s', animationDuration: '8s' }}
         >
           <svg
             className="w-6 h-6 text-primary"

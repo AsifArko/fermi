@@ -1,10 +1,10 @@
-export const dynamic = "force-dynamic";
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
-import { Sidebar } from "@/components/Sidebar";
-import { getCourseProgress } from "@/sanity/lib/courses/getCourseProgress";
-import { checkCourseAccess } from "@/lib/auth";
+export const dynamic = 'force-dynamic';
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
+import getCourseById from '@/sanity/lib/courses/getCourseById';
+import { Sidebar } from '@/components/Sidebar';
+import { getCourseProgress } from '@/sanity/lib/courses/getCourseProgress';
+import { checkCourseAccess } from '@/lib/auth';
 
 interface DashboardViewProps {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ export default async function DashboardView({
   const { courseId } = await params;
 
   if (!user?.id) {
-    return redirect("/");
+    return redirect('/');
   }
 
   const authResult = await checkCourseAccess(user?.id || null, courseId);
@@ -35,7 +35,7 @@ export default async function DashboardView({
   ]);
 
   if (!course) {
-    return redirect("/my-courses");
+    return redirect('/my-courses');
   }
 
   return (

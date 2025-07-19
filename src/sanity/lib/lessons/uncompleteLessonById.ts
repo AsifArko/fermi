@@ -1,6 +1,6 @@
-import { client } from "../adminClient";
-import { sanityFetch } from "../live";
-import groq from "groq";
+import { client } from '../adminClient';
+import { sanityFetch } from '../live';
+import groq from 'groq';
 
 interface UncompleteLessonParams {
   lessonId: string;
@@ -18,7 +18,7 @@ export async function uncompleteLessonById({
   });
 
   if (!student.data) {
-    throw new Error("Student not found");
+    throw new Error('Student not found');
   }
 
   // Find and delete the lesson completion record

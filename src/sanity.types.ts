@@ -15,56 +15,56 @@
 // Source: schema.json
 export type LessonCompletion = {
   _id: string;
-  _type: "lessonCompletion";
+  _type: 'lessonCompletion';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   lesson?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "lesson";
+    [internalGroqTypeReferenceTo]?: 'lesson';
   };
   module?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   completedAt?: string;
 };
 
 export type Module = {
   _id: string;
-  _type: "module";
+  _type: 'module';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
   lessons?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "lesson";
+    [internalGroqTypeReferenceTo]?: 'lesson';
   }>;
 };
 
 export type Lesson = {
   _id: string;
-  _type: "lesson";
+  _type: 'lesson';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -77,7 +77,7 @@ export type Lesson = {
     _key: string;
     asset: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
     };
     title: string;
     description?: string;
@@ -86,39 +86,39 @@ export type Lesson = {
     children?: Array<{
       marks?: Array<string>;
       text?: string;
-      _type: "span";
+      _type: 'span';
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
+    style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+    listItem?: 'bullet' | 'number';
     markDefs?: Array<{
       href?: string;
-      _type: "link";
+      _type: 'link';
       _key: string;
     }>;
     level?: number;
-    _type: "block";
+    _type: 'block';
     _key: string;
   }>;
 };
 
 export type Enrollment = {
   _id: string;
-  _type: "enrollment";
+  _type: 'enrollment';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   amount?: number;
   paymentId?: string;
@@ -127,7 +127,7 @@ export type Enrollment = {
 
 export type Student = {
   _id: string;
-  _type: "student";
+  _type: 'student';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -140,7 +140,7 @@ export type Student = {
 
 export type Course = {
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -151,39 +151,39 @@ export type Course = {
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "category";
+    [internalGroqTypeReferenceTo]?: 'category';
   };
   modules?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   }>;
   instructor?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "instructor";
+    [internalGroqTypeReferenceTo]?: 'instructor';
   };
 };
 
 export type Instructor = {
   _id: string;
-  _type: "instructor";
+  _type: 'instructor';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -192,20 +192,20 @@ export type Instructor = {
   photo?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type Category = {
   _id: string;
-  _type: "category";
+  _type: 'category';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -220,23 +220,23 @@ export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
     text?: string;
-    _type: "span";
+    _type: 'span';
     _key: string;
   }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-  listItem?: "bullet" | "number";
+  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+  listItem?: 'bullet' | 'number';
   markDefs?: Array<{
     href?: string;
-    _type: "link";
+    _type: 'link';
     _key: string;
   }>;
   level?: number;
-  _type: "block";
+  _type: 'block';
   _key: string;
 }>;
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
+  _type: 'sanity.imagePaletteSwatch';
   background?: string;
   foreground?: string;
   population?: number;
@@ -244,7 +244,7 @@ export type SanityImagePaletteSwatch = {
 };
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
+  _type: 'sanity.imagePalette';
   darkMuted?: SanityImagePaletteSwatch;
   lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
@@ -255,14 +255,14 @@ export type SanityImagePalette = {
 };
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
+  _type: 'sanity.imageDimensions';
   height?: number;
   width?: number;
   aspectRatio?: number;
 };
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
+  _type: 'sanity.imageHotspot';
   x?: number;
   y?: number;
   height?: number;
@@ -270,7 +270,7 @@ export type SanityImageHotspot = {
 };
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
+  _type: 'sanity.imageCrop';
   top?: number;
   bottom?: number;
   left?: number;
@@ -279,7 +279,7 @@ export type SanityImageCrop = {
 
 export type SanityFileAsset = {
   _id: string;
-  _type: "sanity.fileAsset";
+  _type: 'sanity.fileAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -301,7 +301,7 @@ export type SanityFileAsset = {
 
 export type SanityImageAsset = {
   _id: string;
-  _type: "sanity.imageAsset";
+  _type: 'sanity.imageAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -323,7 +323,7 @@ export type SanityImageAsset = {
 };
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
+  _type: 'sanity.imageMetadata';
   location?: Geopoint;
   dimensions?: SanityImageDimensions;
   palette?: SanityImagePalette;
@@ -334,20 +334,20 @@ export type SanityImageMetadata = {
 };
 
 export type Geopoint = {
-  _type: "geopoint";
+  _type: 'geopoint';
   lat?: number;
   lng?: number;
   alt?: number;
 };
 
 export type Slug = {
-  _type: "slug";
+  _type: 'slug';
   current?: string;
   source?: string;
 };
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
+  _type: 'sanity.assetSourceData';
   name?: string;
   id?: string;
   url?: string;
@@ -380,7 +380,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Query: *[_type == "course"] {    ...,    "slug": slug.current,    "category": category->{...},    "instructor": instructor->{...},  }
 export type GetCoursesQyeryResult = Array<{
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -391,18 +391,18 @@ export type GetCoursesQyeryResult = Array<{
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category: {
     _id: string;
-    _type: "category";
+    _type: 'category';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -414,14 +414,14 @@ export type GetCoursesQyeryResult = Array<{
   } | null;
   modules?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   }>;
   instructor: {
     _id: string;
-    _type: "instructor";
+    _type: 'instructor';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -430,14 +430,14 @@ export type GetCoursesQyeryResult = Array<{
     photo?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
   } | null;
 }>;
@@ -447,7 +447,7 @@ export type GetCoursesQyeryResult = Array<{
 // Query: *[_type == "student" && clerkId == $clerkId][0]
 export type GetStudentByClerkIdQueryResult = {
   _id: string;
-  _type: "student";
+  _type: 'student';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -459,8 +459,8 @@ export type GetStudentByClerkIdQueryResult = {
 } | null;
 
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+import '@sanity/client';
+declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "course"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "instructor": instructor->{...},\n  }': GetCoursesQyeryResult;
     '*[_type == "student" && clerkId == $clerkId][0]': GetStudentByClerkIdQueryResult;

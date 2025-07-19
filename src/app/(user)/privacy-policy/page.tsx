@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - Fermi",
+  title: 'Privacy Policy - Fermi',
   description:
-    "Read the privacy policy for Fermi, the online learning platform advancing knowledge in technology and science.",
+    'Read the privacy policy for Fermi, the online learning platform advancing knowledge in technology and science.',
 };
 
 export default function PrivacyPolicyPage() {
@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
               className="absolute inset-0"
               style={{
                 backgroundImage: `radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)`,
-                backgroundSize: "40px 40px",
+                backgroundSize: '40px 40px',
               }}
             ></div>
           </div>
@@ -27,11 +27,11 @@ export default function PrivacyPolicyPage() {
           <div className="absolute inset-0">
             <div
               className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent animate-pulse"
-              style={{ animationDuration: "4s" }}
+              style={{ animationDuration: '4s' }}
             ></div>
             <div
               className="absolute bottom-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/15 to-transparent animate-pulse"
-              style={{ animationDelay: "2s", animationDuration: "4s" }}
+              style={{ animationDelay: '2s', animationDuration: '4s' }}
             ></div>
           </div>
           <div className="relative container mx-auto px-4 h-full flex flex-col justify-center">
@@ -50,13 +50,13 @@ export default function PrivacyPolicyPage() {
           {/* Floating Tech Icons (optional, for extra polish) */}
           <div
             className="absolute top-1/4 right-1/4 opacity-10 animate-float"
-            style={{ animationDuration: "6s" }}
+            style={{ animationDuration: '6s' }}
           >
             {/* ...SVG icon from About page... */}
           </div>
           <div
             className="absolute bottom-1/4 left-1/4 opacity-10 animate-float"
-            style={{ animationDelay: "3s", animationDuration: "8s" }}
+            style={{ animationDelay: '3s', animationDuration: '8s' }}
           >
             {/* ...SVG icon from About page... */}
           </div>

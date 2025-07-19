@@ -1,6 +1,6 @@
-import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
-import { getStudentByClerkId } from "@/sanity/lib/student/getStudentByClerkId";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import { isEnrolledInCourse } from '@/sanity/lib/student/isEnrolledInCourse';
+import { getStudentByClerkId } from '@/sanity/lib/student/getStudentByClerkId';
+import getCourseById from '@/sanity/lib/courses/getCourseById';
 
 interface AuthResult {
   isAuthorized: boolean;
@@ -15,7 +15,7 @@ export async function checkCourseAccess(
   if (!clerkId) {
     return {
       isAuthorized: false,
-      redirect: "/",
+      redirect: '/',
     };
   }
 
@@ -23,7 +23,7 @@ export async function checkCourseAccess(
   if (!student?._id) {
     return {
       isAuthorized: false,
-      redirect: "/",
+      redirect: '/',
     };
   }
 

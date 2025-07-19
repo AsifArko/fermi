@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 interface LoomEmbedProps {
   shareUrl: string;
 }
 
 export function LoomEmbed({ shareUrl }: LoomEmbedProps) {
-  const embedUrl = shareUrl.replace("/share/", "/embed/").split("?")[0];
+  const embedUrl = shareUrl.replace('/share/', '/embed/').split('?')[0];
 
   return (
     <div className="relative w-full aspect-video rounded-lg overflow-hidden">

@@ -1,5 +1,5 @@
-import React from "react";
-import Link from "next/link";
+import React from 'react';
+import Link from 'next/link';
 
 function Hero() {
   return (
@@ -10,43 +10,43 @@ function Hero() {
           {/* Large floating circles */}
           <div
             className="absolute top-1/4 left-1/4 w-32 h-32 bg-primary/5 rounded-full animate-pulse"
-            style={{ animationDuration: "12s" }}
+            style={{ animationDuration: '12s' }}
           ></div>
           <div
             className="absolute bottom-1/3 right-1/4 w-24 h-24 bg-secondary/5 rounded-full animate-pulse"
-            style={{ animationDuration: "6s", animationDelay: "1s" }}
+            style={{ animationDuration: '6s', animationDelay: '1s' }}
           ></div>
           <div
             className="absolute top-1/2 right-1/3 w-16 h-16 bg-primary/3 rounded-full animate-pulse"
-            style={{ animationDuration: "3s", animationDelay: "1s" }}
+            style={{ animationDuration: '3s', animationDelay: '1s' }}
           ></div>
 
           {/* Small floating dots */}
           <div
             className="absolute top-1/3 left-1/3 w-2 h-2 bg-primary/20 rounded-full animate-bounce"
-            style={{ animationDuration: "6s" }}
+            style={{ animationDuration: '6s' }}
           ></div>
           <div
             className="absolute bottom-1/4 right-1/3 w-1.5 h-1.5 bg-secondary/30 rounded-full animate-bounce"
-            style={{ animationDuration: "3s", animationDelay: "0.5s" }}
+            style={{ animationDuration: '3s', animationDelay: '0.5s' }}
           ></div>
           <div
             className="absolute top-2/3 left-1/2 w-1 h-1 bg-primary/40 rounded-full animate-bounce"
-            style={{ animationDuration: "1.5s", animationDelay: "1.5s" }}
+            style={{ animationDuration: '1.5s', animationDelay: '1.5s' }}
           ></div>
           <div
             className="absolute bottom-1/3 left-1/4 w-1.5 h-1.5 bg-secondary/25 rounded-full animate-bounce"
-            style={{ animationDuration: "2.5s", animationDelay: "1s" }}
+            style={{ animationDuration: '2.5s', animationDelay: '1s' }}
           ></div>
 
           {/* Geometric shapes */}
           <div
             className="absolute top-1/4 right-1/4 w-8 h-8 border border-primary/10 rotate-45 animate-spin"
-            style={{ animationDuration: "20s" }}
+            style={{ animationDuration: '20s' }}
           ></div>
           <div
             className="absolute bottom-1/4 left-1/3 w-6 h-6 border border-secondary/15 rotate-45 animate-spin"
-            style={{ animationDuration: "15s", animationDirection: "reverse" }}
+            style={{ animationDuration: '15s', animationDirection: 'reverse' }}
           ></div>
         </div>
 
@@ -67,22 +67,22 @@ function Hero() {
 
             {/* Enhanced description */}
             <p className="text-lg md:text-xl text-muted-foreground mb-8 animate-in slide-in-from-bottom-6 duration-1000 delay-500 leading-relaxed max-w-3xl">
-              Explore expert-led courses in{" "}
+              Explore expert-led courses in{' '}
               <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-semibold">
                 Quantum Computing
               </span>
-              ,{" "}
+              ,{' '}
               <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-semibold">
                 Machine Learning
               </span>
-              ,{" "}
+              ,{' '}
               <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-semibold">
                 Software Engineering
               </span>
-              , and{" "}
+              , and{' '}
               <span className="bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent font-semibold">
                 Computer Science
-              </span>{" "}
+              </span>{' '}
               designed to accelerate your learning and career.
             </p>
 
@@ -106,10 +106,10 @@ function Hero() {
         <div
           className="absolute opacity-15 animate-float"
           style={{
-            bottom: "15%",
-            left: "12%",
-            animationDuration: "8s",
-            filter: "blur(0.5px)",
+            bottom: '15%',
+            left: '12%',
+            animationDuration: '8s',
+            filter: 'blur(0.5px)',
           }}
         >
           <svg
@@ -127,11 +127,11 @@ function Hero() {
         <div
           className="absolute opacity-15 animate-float"
           style={{
-            top: "20%",
-            right: "15%",
-            animationDuration: "9s",
-            animationDelay: "1s",
-            filter: "blur(0.5px)",
+            top: '20%',
+            right: '15%',
+            animationDuration: '9s',
+            animationDelay: '1s',
+            filter: 'blur(0.5px)',
           }}
         >
           <svg
@@ -156,11 +156,11 @@ function Hero() {
         <div
           className="absolute opacity-15 animate-float"
           style={{
-            top: "35%",
-            right: "25%",
-            animationDuration: "7s",
-            animationDelay: "0.5s",
-            filter: "blur(0.5px)",
+            top: '35%',
+            right: '25%',
+            animationDuration: '7s',
+            animationDelay: '0.5s',
+            filter: 'blur(0.5px)',
           }}
         >
           <svg

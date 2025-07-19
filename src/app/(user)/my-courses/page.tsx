@@ -1,16 +1,16 @@
-import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
-import { getEnrolledCourses } from "@/sanity/lib/student/getEnrolledCourses";
-import Link from "next/link";
-import { GraduationCap } from "lucide-react";
-import { getCourseProgress } from "@/sanity/lib/courses/getCourseProgress";
-import { CourseCard } from "@/components/CourseCard";
-import { generateRandomHash } from "@/lib/utils";
+import { currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
+import { getEnrolledCourses } from '@/sanity/lib/student/getEnrolledCourses';
+import Link from 'next/link';
+import { GraduationCap } from 'lucide-react';
+import { getCourseProgress } from '@/sanity/lib/courses/getCourseProgress';
+import { CourseCard } from '@/components/CourseCard';
+import { generateRandomHash } from '@/lib/utils';
 
 export default async function MyCoursesPage() {
   const user = await currentUser();
   if (!user?.id) {
-    return redirect("/");
+    return redirect('/');
   }
 
   const enrolledCourses = await getEnrolledCourses(user.id);
@@ -53,7 +53,7 @@ export default async function MyCoursesPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {coursesWithProgress.map((item) => {
+              {coursesWithProgress.map(item => {
                 if (!item || !item.course) return null;
 
                 return (

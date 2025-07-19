@@ -1,24 +1,24 @@
-import { urlFor } from "@/sanity/lib/image";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import EnrollButton from "@/components/EnrollButton";
-import getCourseBySlug from "@/sanity/lib/courses/getCourseBySlug";
-import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
-import { auth } from "@clerk/nextjs/server";
+import { urlFor } from '@/sanity/lib/image';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowLeft } from 'lucide-react';
+import EnrollButton from '@/components/EnrollButton';
+import getCourseBySlug from '@/sanity/lib/courses/getCourseBySlug';
+import { isEnrolledInCourse } from '@/sanity/lib/student/isEnrolledInCourse';
+import { auth } from '@clerk/nextjs/server';
 
 function RectangleShape({
-  position = "top-right",
+  position = 'top-right',
 }: {
-  position?: "top-right" | "bottom-right";
+  position?: 'top-right' | 'bottom-right';
 }) {
-  const base = "absolute z-20 opacity-40 animate-float";
+  const base = 'absolute z-20 opacity-40 animate-float';
   const posClass =
-    position === "top-right" ? "top-4 right-4" : "bottom-4 right-4";
+    position === 'top-right' ? 'top-4 right-4' : 'bottom-4 right-4';
   return (
     <div
       className={`${base} ${posClass}`}
-      style={{ width: "60px", height: "32px", animationDuration: "10s" }}
+      style={{ width: '60px', height: '32px', animationDuration: '10s' }}
     >
       <svg viewBox="0 0 100 50" className="w-full h-full">
         <rect
@@ -76,8 +76,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
       <div className="relative h-[56vh] w-full overflow-hidden shadow-lg mt-4 pt-20 md:pt-0 rounded-b-lg">
         {course.image && (
           <Image
-            src={urlFor(course.image).url() || ""}
-            alt={course.title || "Course Title"}
+            src={urlFor(course.image).url() || ''}
+            alt={course.title || 'Course Title'}
             fill
             className="object-cover"
             priority
@@ -95,7 +95,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="px-3 py-1 bg-white/20 text-white rounded text-sm font-medium backdrop-blur-sm">
-                    {course.category?.name || "Uncategorized"}
+                    {course.category?.name || 'Uncategorized'}
                   </span>
                 </div>
                 <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg truncate">
@@ -107,7 +107,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
               </div>
               <div className="flex flex-col items-end gap-2 min-w-[180px] border border-white/20 bg-white/10 rounded px-6 py-4 shadow-md">
                 <div className="text-2xl font-bold text-white mb-1">
-                  {course.price === 0 ? "Free" : `$${course.price}`}
+                  {course.price === 0 ? 'Free' : `$${course.price}`}
                 </div>
                 <EnrollButton courseId={course._id} isEnrolled={isEnrolled} />
               </div>
@@ -175,8 +175,8 @@ export default async function CoursePage({ params }: CoursePageProps) {
                     {course.instructor.photo && (
                       <div className="relative h-14 w-14 shadow-md border-2 border-primary/20 rounded-full overflow-hidden">
                         <Image
-                          src={urlFor(course.instructor.photo).url() || ""}
-                          alt={course.instructor.name || "Course Instructor"}
+                          src={urlFor(course.instructor.photo).url() || ''}
+                          alt={course.instructor.name || 'Course Instructor'}
                           fill
                           className="object-cover"
                         />

@@ -15,56 +15,56 @@
 // Source: schema.json
 export type LessonCompletion = {
   _id: string;
-  _type: "lessonCompletion";
+  _type: 'lessonCompletion';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   lesson?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "lesson";
+    [internalGroqTypeReferenceTo]?: 'lesson';
   };
   module?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   completedAt?: string;
 };
 
 export type Module = {
   _id: string;
-  _type: "module";
+  _type: 'module';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
   lessons?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "lesson";
+    [internalGroqTypeReferenceTo]?: 'lesson';
   }>;
 };
 
 export type Lesson = {
   _id: string;
-  _type: "lesson";
+  _type: 'lesson';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -76,69 +76,81 @@ export type Lesson = {
   files?: Array<{
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     };
     media?: unknown;
     title?: string;
     description?: string;
-    _type: "file";
+    _type: 'file';
     _key: string;
   }>;
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    _key: string;
-  } & Code | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
-    _type: "image";
-    _key: string;
-  }>;
+  content?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?:
+          | 'normal'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'blockquote';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | ({
+        _key: string;
+      } & Code)
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        caption?: string;
+        _type: 'image';
+        _key: string;
+      }
+  >;
 };
 
 export type Enrollment = {
   _id: string;
-  _type: "enrollment";
+  _type: 'enrollment';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   amount?: number;
   paymentId?: string;
@@ -147,7 +159,7 @@ export type Enrollment = {
 
 export type Student = {
   _id: string;
-  _type: "student";
+  _type: 'student';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -160,7 +172,7 @@ export type Student = {
 
 export type Course = {
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -171,39 +183,39 @@ export type Course = {
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "category";
+    [internalGroqTypeReferenceTo]?: 'category';
   };
   modules?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   }>;
   instructor?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "instructor";
+    [internalGroqTypeReferenceTo]?: 'instructor';
   };
 };
 
 export type Instructor = {
   _id: string;
-  _type: "instructor";
+  _type: 'instructor';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -212,26 +224,46 @@ export type Instructor = {
   photo?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
 };
 
 export type Code = {
-  _type: "code";
+  _type: 'code';
   code?: string;
-  language?: "javascript" | "typescript" | "python" | "java" | "cpp" | "csharp" | "php" | "ruby" | "go" | "rust" | "swift" | "kotlin" | "html" | "css" | "sql" | "json" | "yaml" | "markdown" | "shell" | "text";
+  language?:
+    | 'javascript'
+    | 'typescript'
+    | 'python'
+    | 'java'
+    | 'cpp'
+    | 'csharp'
+    | 'php'
+    | 'ruby'
+    | 'go'
+    | 'rust'
+    | 'swift'
+    | 'kotlin'
+    | 'html'
+    | 'css'
+    | 'sql'
+    | 'json'
+    | 'yaml'
+    | 'markdown'
+    | 'shell'
+    | 'text';
 };
 
 export type Category = {
   _id: string;
-  _type: "category";
+  _type: 'category';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -246,23 +278,23 @@ export type BlockContent = Array<{
   children?: Array<{
     marks?: Array<string>;
     text?: string;
-    _type: "span";
+    _type: 'span';
     _key: string;
   }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-  listItem?: "bullet" | "number";
+  style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote';
+  listItem?: 'bullet' | 'number';
   markDefs?: Array<{
     href?: string;
-    _type: "link";
+    _type: 'link';
     _key: string;
   }>;
   level?: number;
-  _type: "block";
+  _type: 'block';
   _key: string;
 }>;
 
 export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
+  _type: 'sanity.imagePaletteSwatch';
   background?: string;
   foreground?: string;
   population?: number;
@@ -270,7 +302,7 @@ export type SanityImagePaletteSwatch = {
 };
 
 export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
+  _type: 'sanity.imagePalette';
   darkMuted?: SanityImagePaletteSwatch;
   lightVibrant?: SanityImagePaletteSwatch;
   darkVibrant?: SanityImagePaletteSwatch;
@@ -281,14 +313,14 @@ export type SanityImagePalette = {
 };
 
 export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
+  _type: 'sanity.imageDimensions';
   height?: number;
   width?: number;
   aspectRatio?: number;
 };
 
 export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
+  _type: 'sanity.imageHotspot';
   x?: number;
   y?: number;
   height?: number;
@@ -296,7 +328,7 @@ export type SanityImageHotspot = {
 };
 
 export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
+  _type: 'sanity.imageCrop';
   top?: number;
   bottom?: number;
   left?: number;
@@ -305,7 +337,7 @@ export type SanityImageCrop = {
 
 export type SanityFileAsset = {
   _id: string;
-  _type: "sanity.fileAsset";
+  _type: 'sanity.fileAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -327,7 +359,7 @@ export type SanityFileAsset = {
 
 export type SanityImageAsset = {
   _id: string;
-  _type: "sanity.imageAsset";
+  _type: 'sanity.imageAsset';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -349,7 +381,7 @@ export type SanityImageAsset = {
 };
 
 export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
+  _type: 'sanity.imageMetadata';
   location?: Geopoint;
   dimensions?: SanityImageDimensions;
   palette?: SanityImagePalette;
@@ -360,33 +392,54 @@ export type SanityImageMetadata = {
 };
 
 export type Geopoint = {
-  _type: "geopoint";
+  _type: 'geopoint';
   lat?: number;
   lng?: number;
   alt?: number;
 };
 
 export type Slug = {
-  _type: "slug";
+  _type: 'slug';
   current?: string;
   source?: string;
 };
 
 export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
+  _type: 'sanity.assetSourceData';
   name?: string;
   id?: string;
   url?: string;
 };
 
-export type AllSanitySchemaTypes = LessonCompletion | Module | Lesson | Enrollment | Student | Course | Instructor | Code | Category | BlockContent | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
+export type AllSanitySchemaTypes =
+  | LessonCompletion
+  | Module
+  | Lesson
+  | Enrollment
+  | Student
+  | Course
+  | Instructor
+  | Code
+  | Category
+  | BlockContent
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageHotspot
+  | SanityImageCrop
+  | SanityFileAsset
+  | SanityImageAsset
+  | SanityImageMetadata
+  | Geopoint
+  | Slug
+  | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: src/sanity/lib/courses/getCourseById.ts
 // Variable: getCourseByIdQuery
 // Query: *[_type == "course" && _id == $id][0] {      ...,  // Spread all course fields      "category": category->{...},  // Expand the category reference, including all its fields      "instructor": instructor->{...},  // Expand the instructor reference, including all its fields      "modules": modules[]-> {  // Expand the array of module references        ...,  // Include all module fields        "lessons": lessons[]-> {...}  // For each module, expand its array of lesson references      }    }
 export type GetCourseByIdQueryResult = {
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -397,18 +450,18 @@ export type GetCourseByIdQueryResult = {
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category: {
     _id: string;
-    _type: "category";
+    _type: 'category';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -420,14 +473,14 @@ export type GetCourseByIdQueryResult = {
   } | null;
   modules: Array<{
     _id: string;
-    _type: "module";
+    _type: 'module';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     title?: string;
     lessons: Array<{
       _id: string;
-      _type: "lesson";
+      _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -439,55 +492,67 @@ export type GetCourseByIdQueryResult = {
       files?: Array<{
         asset?: {
           _ref: string;
-          _type: "reference";
+          _type: 'reference';
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
         };
         media?: unknown;
         title?: string;
         description?: string;
-        _type: "file";
+        _type: 'file';
         _key: string;
       }>;
-      content?: Array<{
-        _key: string;
-      } & Code | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        caption?: string;
-        _type: "image";
-        _key: string;
-      }>;
+      content?: Array<
+        | ({
+            _key: string;
+          } & Code)
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: 'span';
+              _key: string;
+            }>;
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal';
+            listItem?: 'bullet' | 'number';
+            markDefs?: Array<{
+              href?: string;
+              _type: 'link';
+              _key: string;
+            }>;
+            level?: number;
+            _type: 'block';
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: 'image';
+            _key: string;
+          }
+      >;
     }> | null;
   }> | null;
   instructor: {
     _id: string;
-    _type: "instructor";
+    _type: 'instructor';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -496,14 +561,14 @@ export type GetCourseByIdQueryResult = {
     photo?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
   } | null;
 } | null;
@@ -513,7 +578,7 @@ export type GetCourseByIdQueryResult = {
 // Query: *[_type == "course" && slug.current == $slug][0] {      ...,      "category": category->{...},      "instructor": instructor->{...},      "modules": modules[]-> {        ...,        "lessons": lessons[]-> {...}      }    }
 export type GetCourseBySlugQueryResult = {
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -524,18 +589,18 @@ export type GetCourseBySlugQueryResult = {
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category: {
     _id: string;
-    _type: "category";
+    _type: 'category';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -547,14 +612,14 @@ export type GetCourseBySlugQueryResult = {
   } | null;
   modules: Array<{
     _id: string;
-    _type: "module";
+    _type: 'module';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     title?: string;
     lessons: Array<{
       _id: string;
-      _type: "lesson";
+      _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -566,55 +631,67 @@ export type GetCourseBySlugQueryResult = {
       files?: Array<{
         asset?: {
           _ref: string;
-          _type: "reference";
+          _type: 'reference';
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
         };
         media?: unknown;
         title?: string;
         description?: string;
-        _type: "file";
+        _type: 'file';
         _key: string;
       }>;
-      content?: Array<{
-        _key: string;
-      } & Code | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        caption?: string;
-        _type: "image";
-        _key: string;
-      }>;
+      content?: Array<
+        | ({
+            _key: string;
+          } & Code)
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: 'span';
+              _key: string;
+            }>;
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal';
+            listItem?: 'bullet' | 'number';
+            markDefs?: Array<{
+              href?: string;
+              _type: 'link';
+              _key: string;
+            }>;
+            level?: number;
+            _type: 'block';
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: 'image';
+            _key: string;
+          }
+      >;
     }> | null;
   }> | null;
   instructor: {
     _id: string;
-    _type: "instructor";
+    _type: 'instructor';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -623,14 +700,14 @@ export type GetCourseBySlugQueryResult = {
     photo?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
   } | null;
 } | null;
@@ -641,19 +718,19 @@ export type GetCourseBySlugQueryResult = {
 export type ProgressQueryResult = {
   completedLessons: Array<{
     _id: string;
-    _type: "lessonCompletion";
+    _type: 'lessonCompletion';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     student?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "student";
+      [internalGroqTypeReferenceTo]?: 'student';
     };
     lesson: {
       _id: string;
-      _type: "lesson";
+      _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -665,77 +742,89 @@ export type ProgressQueryResult = {
       files?: Array<{
         asset?: {
           _ref: string;
-          _type: "reference";
+          _type: 'reference';
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
         };
         media?: unknown;
         title?: string;
         description?: string;
-        _type: "file";
+        _type: 'file';
         _key: string;
       }>;
-      content?: Array<{
-        _key: string;
-      } & Code | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        caption?: string;
-        _type: "image";
-        _key: string;
-      }>;
+      content?: Array<
+        | ({
+            _key: string;
+          } & Code)
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: 'span';
+              _key: string;
+            }>;
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal';
+            listItem?: 'bullet' | 'number';
+            markDefs?: Array<{
+              href?: string;
+              _type: 'link';
+              _key: string;
+            }>;
+            level?: number;
+            _type: 'block';
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: 'image';
+            _key: string;
+          }
+      >;
     } | null;
     module: {
       _id: string;
-      _type: "module";
+      _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       title?: string;
       lessons?: Array<{
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
         _key: string;
-        [internalGroqTypeReferenceTo]?: "lesson";
+        [internalGroqTypeReferenceTo]?: 'lesson';
       }>;
     } | null;
     course?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "course";
+      [internalGroqTypeReferenceTo]?: 'course';
     };
     completedAt?: string;
   }>;
   course: {
     _id: string;
-    _type: "course";
+    _type: 'course';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -746,31 +835,31 @@ export type ProgressQueryResult = {
     image?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
     category?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "category";
+      [internalGroqTypeReferenceTo]?: 'category';
     };
     modules: Array<{
       _id: string;
-      _type: "module";
+      _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       title?: string;
       lessons: Array<{
         _id: string;
-        _type: "lesson";
+        _type: 'lesson';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
@@ -782,57 +871,69 @@ export type ProgressQueryResult = {
         files?: Array<{
           asset?: {
             _ref: string;
-            _type: "reference";
+            _type: 'reference';
             _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+            [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
           };
           media?: unknown;
           title?: string;
           description?: string;
-          _type: "file";
+          _type: 'file';
           _key: string;
         }>;
-        content?: Array<{
-          _key: string;
-        } & Code | {
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            href?: string;
-            _type: "link";
-            _key: string;
-          }>;
-          level?: number;
-          _type: "block";
-          _key: string;
-        } | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt?: string;
-          caption?: string;
-          _type: "image";
-          _key: string;
-        }>;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Code)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: 'span';
+                _key: string;
+              }>;
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal';
+              listItem?: 'bullet' | 'number';
+              markDefs?: Array<{
+                href?: string;
+                _type: 'link';
+                _key: string;
+              }>;
+              level?: number;
+              _type: 'block';
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: 'reference';
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              caption?: string;
+              _type: 'image';
+              _key: string;
+            }
+        >;
       }> | null;
     }> | null;
     instructor?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "instructor";
+      [internalGroqTypeReferenceTo]?: 'instructor';
     };
   } | null;
 };
@@ -842,7 +943,7 @@ export type ProgressQueryResult = {
 // Query: *[_type == "course"] {    ...,    "slug": slug.current,    "category": category->{...},    "instructor": instructor->{...}  }
 export type GetCoursesQueryResult = Array<{
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -853,18 +954,18 @@ export type GetCoursesQueryResult = Array<{
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category: {
     _id: string;
-    _type: "category";
+    _type: 'category';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -876,14 +977,14 @@ export type GetCoursesQueryResult = Array<{
   } | null;
   modules?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   }>;
   instructor: {
     _id: string;
-    _type: "instructor";
+    _type: 'instructor';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -892,14 +993,14 @@ export type GetCoursesQueryResult = Array<{
     photo?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
   } | null;
 }>;
@@ -909,7 +1010,7 @@ export type GetCoursesQueryResult = Array<{
 // Query: *[_type == "course" && (    title match $term + "*" ||    description match $term + "*" ||    category->name match $term + "*"  )] {    ...,    "slug": slug.current,    "category": category->{...},    "instructor": instructor->{...}  }
 export type SearchQueryResult = Array<{
   _id: string;
-  _type: "course";
+  _type: 'course';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -920,18 +1021,18 @@ export type SearchQueryResult = Array<{
   image?: {
     asset?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
     };
     media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    _type: "image";
+    _type: 'image';
   };
   category: {
     _id: string;
-    _type: "category";
+    _type: 'category';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -943,14 +1044,14 @@ export type SearchQueryResult = Array<{
   } | null;
   modules?: Array<{
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
     _key: string;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   }>;
   instructor: {
     _id: string;
-    _type: "instructor";
+    _type: 'instructor';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -959,14 +1060,14 @@ export type SearchQueryResult = Array<{
     photo?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
   } | null;
 }>;
@@ -976,7 +1077,7 @@ export type SearchQueryResult = Array<{
 // Query: *[_type == "lesson" && _id == $id][0] {    ...,    files[]{      _key,      asset,      title,      description    },    "module": module->{      ...,      "course": course->{...}    }  }
 export type GetLessonByIdQueryResult = {
   _id: string;
-  _type: "lesson";
+  _type: 'lesson';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -989,47 +1090,59 @@ export type GetLessonByIdQueryResult = {
     _key: string;
     asset: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
     } | null;
     title: string | null;
     description: string | null;
   }> | null;
-  content?: Array<{
-    _key: string;
-  } & Code | {
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
-    _type: "image";
-    _key: string;
-  }>;
+  content?: Array<
+    | ({
+        _key: string;
+      } & Code)
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: 'span';
+          _key: string;
+        }>;
+        style?:
+          | 'blockquote'
+          | 'h1'
+          | 'h2'
+          | 'h3'
+          | 'h4'
+          | 'h5'
+          | 'h6'
+          | 'normal';
+        listItem?: 'bullet' | 'number';
+        markDefs?: Array<{
+          href?: string;
+          _type: 'link';
+          _key: string;
+        }>;
+        level?: number;
+        _type: 'block';
+        _key: string;
+      }
+    | {
+        asset?: {
+          _ref: string;
+          _type: 'reference';
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt?: string;
+        caption?: string;
+        _type: 'image';
+        _key: string;
+      }
+  >;
   module: null;
 } | null;
 
@@ -1038,33 +1151,33 @@ export type GetLessonByIdQueryResult = {
 // Query: *[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0] {    ...  }
 export type CompletionStatusQueryResult = {
   _id: string;
-  _type: "lessonCompletion";
+  _type: 'lessonCompletion';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   lesson?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "lesson";
+    [internalGroqTypeReferenceTo]?: 'lesson';
   };
   module?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "module";
+    [internalGroqTypeReferenceTo]?: 'module';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   completedAt?: string;
 } | null;
@@ -1075,19 +1188,19 @@ export type CompletionStatusQueryResult = {
 export type GetCompletionsQueryResult = {
   completedLessons: Array<{
     _id: string;
-    _type: "lessonCompletion";
+    _type: 'lessonCompletion';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     student?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "student";
+      [internalGroqTypeReferenceTo]?: 'student';
     };
     lesson: {
       _id: string;
-      _type: "lesson";
+      _type: 'lesson';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -1099,77 +1212,89 @@ export type GetCompletionsQueryResult = {
       files?: Array<{
         asset?: {
           _ref: string;
-          _type: "reference";
+          _type: 'reference';
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+          [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
         };
         media?: unknown;
         title?: string;
         description?: string;
-        _type: "file";
+        _type: 'file';
         _key: string;
       }>;
-      content?: Array<{
-        _key: string;
-      } & Code | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      } | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt?: string;
-        caption?: string;
-        _type: "image";
-        _key: string;
-      }>;
+      content?: Array<
+        | ({
+            _key: string;
+          } & Code)
+        | {
+            children?: Array<{
+              marks?: Array<string>;
+              text?: string;
+              _type: 'span';
+              _key: string;
+            }>;
+            style?:
+              | 'blockquote'
+              | 'h1'
+              | 'h2'
+              | 'h3'
+              | 'h4'
+              | 'h5'
+              | 'h6'
+              | 'normal';
+            listItem?: 'bullet' | 'number';
+            markDefs?: Array<{
+              href?: string;
+              _type: 'link';
+              _key: string;
+            }>;
+            level?: number;
+            _type: 'block';
+            _key: string;
+          }
+        | {
+            asset?: {
+              _ref: string;
+              _type: 'reference';
+              _weak?: boolean;
+              [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+            };
+            media?: unknown;
+            hotspot?: SanityImageHotspot;
+            crop?: SanityImageCrop;
+            alt?: string;
+            caption?: string;
+            _type: 'image';
+            _key: string;
+          }
+      >;
     } | null;
     module: {
       _id: string;
-      _type: "module";
+      _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       title?: string;
       lessons?: Array<{
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
         _key: string;
-        [internalGroqTypeReferenceTo]?: "lesson";
+        [internalGroqTypeReferenceTo]?: 'lesson';
       }>;
     } | null;
     course?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "course";
+      [internalGroqTypeReferenceTo]?: 'course';
     };
     completedAt?: string;
   }>;
   course: {
     _id: string;
-    _type: "course";
+    _type: 'course';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
@@ -1180,31 +1305,31 @@ export type GetCompletionsQueryResult = {
     image?: {
       asset?: {
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
       };
       media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      _type: "image";
+      _type: 'image';
     };
     category?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "category";
+      [internalGroqTypeReferenceTo]?: 'category';
     };
     modules: Array<{
       _id: string;
-      _type: "module";
+      _type: 'module';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
       title?: string;
       lessons: Array<{
         _id: string;
-        _type: "lesson";
+        _type: 'lesson';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
@@ -1216,57 +1341,69 @@ export type GetCompletionsQueryResult = {
         files?: Array<{
           asset?: {
             _ref: string;
-            _type: "reference";
+            _type: 'reference';
             _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+            [internalGroqTypeReferenceTo]?: 'sanity.fileAsset';
           };
           media?: unknown;
           title?: string;
           description?: string;
-          _type: "file";
+          _type: 'file';
           _key: string;
         }>;
-        content?: Array<{
-          _key: string;
-        } & Code | {
-          children?: Array<{
-            marks?: Array<string>;
-            text?: string;
-            _type: "span";
-            _key: string;
-          }>;
-          style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-          listItem?: "bullet" | "number";
-          markDefs?: Array<{
-            href?: string;
-            _type: "link";
-            _key: string;
-          }>;
-          level?: number;
-          _type: "block";
-          _key: string;
-        } | {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt?: string;
-          caption?: string;
-          _type: "image";
-          _key: string;
-        }>;
+        content?: Array<
+          | ({
+              _key: string;
+            } & Code)
+          | {
+              children?: Array<{
+                marks?: Array<string>;
+                text?: string;
+                _type: 'span';
+                _key: string;
+              }>;
+              style?:
+                | 'blockquote'
+                | 'h1'
+                | 'h2'
+                | 'h3'
+                | 'h4'
+                | 'h5'
+                | 'h6'
+                | 'normal';
+              listItem?: 'bullet' | 'number';
+              markDefs?: Array<{
+                href?: string;
+                _type: 'link';
+                _key: string;
+              }>;
+              level?: number;
+              _type: 'block';
+              _key: string;
+            }
+          | {
+              asset?: {
+                _ref: string;
+                _type: 'reference';
+                _weak?: boolean;
+                [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+              };
+              media?: unknown;
+              hotspot?: SanityImageHotspot;
+              crop?: SanityImageCrop;
+              alt?: string;
+              caption?: string;
+              _type: 'image';
+              _key: string;
+            }
+        >;
       }> | null;
     }> | null;
     instructor?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "instructor";
+      [internalGroqTypeReferenceTo]?: 'instructor';
     };
   } | null;
 };
@@ -1277,19 +1414,19 @@ export type GetCompletionsQueryResult = {
 export type GetEnrolledCoursesQueryResult = {
   enrolledCourses: Array<{
     _id: string;
-    _type: "enrollment";
+    _type: 'enrollment';
     _createdAt: string;
     _updatedAt: string;
     _rev: string;
     student?: {
       _ref: string;
-      _type: "reference";
+      _type: 'reference';
       _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "student";
+      [internalGroqTypeReferenceTo]?: 'student';
     };
     course: {
       _id: string;
-      _type: "course";
+      _type: 'course';
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
@@ -1300,18 +1437,18 @@ export type GetEnrolledCoursesQueryResult = {
       image?: {
         asset?: {
           _ref: string;
-          _type: "reference";
+          _type: 'reference';
           _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
         };
         media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
-        _type: "image";
+        _type: 'image';
       };
       category: {
         _id: string;
-        _type: "category";
+        _type: 'category';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
@@ -1323,14 +1460,14 @@ export type GetEnrolledCoursesQueryResult = {
       } | null;
       modules?: Array<{
         _ref: string;
-        _type: "reference";
+        _type: 'reference';
         _weak?: boolean;
         _key: string;
-        [internalGroqTypeReferenceTo]?: "module";
+        [internalGroqTypeReferenceTo]?: 'module';
       }>;
       instructor: {
         _id: string;
-        _type: "instructor";
+        _type: 'instructor';
         _createdAt: string;
         _updatedAt: string;
         _rev: string;
@@ -1339,14 +1476,14 @@ export type GetEnrolledCoursesQueryResult = {
         photo?: {
           asset?: {
             _ref: string;
-            _type: "reference";
+            _type: 'reference';
             _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
           };
           media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
-          _type: "image";
+          _type: 'image';
         };
       } | null;
     } | null;
@@ -1361,7 +1498,7 @@ export type GetEnrolledCoursesQueryResult = {
 // Query: *[_type == "student" && clerkId == $clerkId][0]
 export type GetStudentByClerkIdQueryResult = {
   _id: string;
-  _type: "student";
+  _type: 'student';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
@@ -1380,21 +1517,21 @@ export type StudentQueryResult = string | null;
 // Query: *[_type == "enrollment" && student._ref == $studentId && course._ref == $courseId][0]
 export type EnrollmentQueryResult = {
   _id: string;
-  _type: "enrollment";
+  _type: 'enrollment';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   student?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "student";
+    [internalGroqTypeReferenceTo]?: 'student';
   };
   course?: {
     _ref: string;
-    _type: "reference";
+    _type: 'reference';
     _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "course";
+    [internalGroqTypeReferenceTo]?: 'course';
   };
   amount?: number;
   paymentId?: string;
@@ -1402,19 +1539,21 @@ export type EnrollmentQueryResult = {
 } | null;
 
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+import '@sanity/client';
+declare module '@sanity/client' {
   interface SanityQueries {
-    "*[_type == \"course\" && _id == $id][0] {\n      ...,  // Spread all course fields\n      \"category\": category->{...},  // Expand the category reference, including all its fields\n      \"instructor\": instructor->{...},  // Expand the instructor reference, including all its fields\n      \"modules\": modules[]-> {  // Expand the array of module references\n        ...,  // Include all module fields\n        \"lessons\": lessons[]-> {...}  // For each module, expand its array of lesson references\n      }\n    }": GetCourseByIdQueryResult;
-    "*[_type == \"course\" && slug.current == $slug][0] {\n      ...,\n      \"category\": category->{...},\n      \"instructor\": instructor->{...},\n      \"modules\": modules[]-> {\n        ...,\n        \"lessons\": lessons[]-> {...}\n      }\n    }": GetCourseBySlugQueryResult;
-    "{\n    \"completedLessons\": *[_type == \"lessonCompletion\" && student._ref == $studentId && course._ref == $courseId] {\n      ...,\n      \"lesson\": lesson->{...},\n      \"module\": module->{...}\n    },\n    \"course\": *[_type == \"course\" && _id == $courseId][0] {\n      ...,\n      \"modules\": modules[]-> {\n        ...,\n        \"lessons\": lessons[]-> {...}\n      }\n    }\n  }": ProgressQueryResult | GetCompletionsQueryResult;
-    "*[_type == \"course\"] {\n    ...,\n    \"slug\": slug.current,\n    \"category\": category->{...},\n    \"instructor\": instructor->{...}\n  }": GetCoursesQueryResult;
-    "*[_type == \"course\" && (\n    title match $term + \"*\" ||\n    description match $term + \"*\" ||\n    category->name match $term + \"*\"\n  )] {\n    ...,\n    \"slug\": slug.current,\n    \"category\": category->{...},\n    \"instructor\": instructor->{...}\n  }": SearchQueryResult;
-    "*[_type == \"lesson\" && _id == $id][0] {\n    ...,\n    files[]{\n      _key,\n      asset,\n      title,\n      description\n    },\n    \"module\": module->{\n      ...,\n      \"course\": course->{...}\n    }\n  }": GetLessonByIdQueryResult;
-    "*[_type == \"lessonCompletion\" && student._ref == $studentId && lesson._ref == $lessonId][0] {\n    ...\n  }": CompletionStatusQueryResult;
-    "*[_type == \"student\" && clerkId == $clerkId][0] {\n    \"enrolledCourses\": *[_type == \"enrollment\" && student._ref == ^._id] {\n      ...,\n      \"course\": course-> {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n      }\n    }\n  }": GetEnrolledCoursesQueryResult;
-    "*[_type == \"student\" && clerkId == $clerkId][0]": GetStudentByClerkIdQueryResult;
-    "*[_type == \"student\" && clerkId == $clerkId][0]._id": StudentQueryResult;
-    "*[_type == \"enrollment\" && student._ref == $studentId && course._ref == $courseId][0]": EnrollmentQueryResult;
+    '*[_type == "course" && _id == $id][0] {\n      ...,  // Spread all course fields\n      "category": category->{...},  // Expand the category reference, including all its fields\n      "instructor": instructor->{...},  // Expand the instructor reference, including all its fields\n      "modules": modules[]-> {  // Expand the array of module references\n        ...,  // Include all module fields\n        "lessons": lessons[]-> {...}  // For each module, expand its array of lesson references\n      }\n    }': GetCourseByIdQueryResult;
+    '*[_type == "course" && slug.current == $slug][0] {\n      ...,\n      "category": category->{...},\n      "instructor": instructor->{...},\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }': GetCourseBySlugQueryResult;
+    '{\n    "completedLessons": *[_type == "lessonCompletion" && student._ref == $studentId && course._ref == $courseId] {\n      ...,\n      "lesson": lesson->{...},\n      "module": module->{...}\n    },\n    "course": *[_type == "course" && _id == $courseId][0] {\n      ...,\n      "modules": modules[]-> {\n        ...,\n        "lessons": lessons[]-> {...}\n      }\n    }\n  }':
+      | ProgressQueryResult
+      | GetCompletionsQueryResult;
+    '*[_type == "course"] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "instructor": instructor->{...}\n  }': GetCoursesQueryResult;
+    '*[_type == "course" && (\n    title match $term + "*" ||\n    description match $term + "*" ||\n    category->name match $term + "*"\n  )] {\n    ...,\n    "slug": slug.current,\n    "category": category->{...},\n    "instructor": instructor->{...}\n  }': SearchQueryResult;
+    '*[_type == "lesson" && _id == $id][0] {\n    ...,\n    files[]{\n      _key,\n      asset,\n      title,\n      description\n    },\n    "module": module->{\n      ...,\n      "course": course->{...}\n    }\n  }': GetLessonByIdQueryResult;
+    '*[_type == "lessonCompletion" && student._ref == $studentId && lesson._ref == $lessonId][0] {\n    ...\n  }': CompletionStatusQueryResult;
+    '*[_type == "student" && clerkId == $clerkId][0] {\n    "enrolledCourses": *[_type == "enrollment" && student._ref == ^._id] {\n      ...,\n      "course": course-> {\n        ...,\n        "slug": slug.current,\n        "category": category->{...},\n        "instructor": instructor->{...}\n      }\n    }\n  }': GetEnrolledCoursesQueryResult;
+    '*[_type == "student" && clerkId == $clerkId][0]': GetStudentByClerkIdQueryResult;
+    '*[_type == "student" && clerkId == $clerkId][0]._id': StudentQueryResult;
+    '*[_type == "enrollment" && student._ref == $studentId && course._ref == $courseId][0]': EnrollmentQueryResult;
   }
 }

@@ -1,7 +1,7 @@
-import { PortableTextComponents } from "@portabletext/react";
-import React from "react";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { PortableTextComponents } from '@portabletext/react';
+import React from 'react';
+import Image from 'next/image';
+import { urlFor } from '@/sanity/lib/image';
 
 export const lessonPortableTextComponents: PortableTextComponents = {
   block: {
@@ -56,7 +56,7 @@ export const lessonPortableTextComponents: PortableTextComponents = {
     code: ({ value }) => (
       <pre className="bg-muted rounded-lg p-4 my-4 overflow-x-auto border">
         <div className="flex items-center justify-between mb-2 text-xs text-muted-foreground">
-          <span className="font-medium">{value.language || "text"}</span>
+          <span className="font-medium">{value.language || 'text'}</span>
         </div>
         <code className="text-sm font-mono text-primary/90 whitespace-pre">
           {value.code}
@@ -88,12 +88,12 @@ export const lessonPortableTextComponents: PortableTextComponents = {
         <figure className="my-6">
           <Image
             src={imageUrl}
-            alt={value.alt || ""}
+            alt={value.alt || ''}
             width={0}
             height={0}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 800px"
             className="w-full h-auto rounded-lg shadow-md"
-            style={{ objectFit: "contain" }}
+            style={{ objectFit: 'contain' }}
           />
           {value.caption && (
             <figcaption className="text-sm text-muted-foreground text-center mt-2 italic">

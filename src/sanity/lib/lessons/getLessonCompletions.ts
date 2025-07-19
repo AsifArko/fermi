@@ -1,5 +1,5 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
 
 export async function getLessonCompletions(
   studentId: string,
@@ -28,10 +28,10 @@ export async function getLessonCompletions(
   const { course, completedLessons } = result.data;
 
   // Calculate module progress
-  const moduleProgress = course?.modules?.map((module) => {
+  const moduleProgress = course?.modules?.map(module => {
     const totalLessons = module.lessons?.length || 0;
     const completedInModule = completedLessons.filter(
-      (completion) => completion.module?._id === module._id
+      completion => completion.module?._id === module._id
     ).length;
 
     return {

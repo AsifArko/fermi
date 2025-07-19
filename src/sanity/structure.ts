@@ -1,32 +1,32 @@
-import { StructureBuilder } from "sanity/structure";
+import { StructureBuilder } from 'sanity/structure';
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure = (S: StructureBuilder) =>
   S.list()
-    .title("Admin Dashboard")
+    .title('Admin Dashboard')
     .items([
       // Course Content
       S.listItem()
-        .title("Course Content")
+        .title('Course Content')
         .child(
-          S.documentTypeList("course")
-            .title("Courses")
-            .child((courseId) =>
+          S.documentTypeList('course')
+            .title('Courses')
+            .child(courseId =>
               S.list()
-                .title("Course Options")
+                .title('Course Options')
                 .items([
                   // Option to edit course content
                   S.listItem()
-                    .title("Edit Course Content")
+                    .title('Edit Course Content')
                     .child(
-                      S.document().schemaType("course").documentId(courseId)
+                      S.document().schemaType('course').documentId(courseId)
                     ),
                   // Option to view course enrollments
                   S.listItem()
-                    .title("View Students")
+                    .title('View Students')
                     .child(
                       S.documentList()
-                        .title("Course Enrollments")
+                        .title('Course Enrollments')
                         .filter(
                           '_type == "enrollment" && course._ref == $courseId'
                         )
@@ -40,33 +40,33 @@ export const structure = (S: StructureBuilder) =>
 
       // Users
       S.listItem()
-        .title("User Management")
+        .title('User Management')
         .child(
           S.list()
-            .title("Select a Type of User")
+            .title('Select a Type of User')
             .items([
               // Instructors with options
               S.listItem()
-                .title("Instructors")
-                .schemaType("instructor")
+                .title('Instructors')
+                .schemaType('instructor')
                 .child(
-                  S.documentTypeList("instructor")
-                    .title("Instructors")
-                    .child((instructorId) =>
+                  S.documentTypeList('instructor')
+                    .title('Instructors')
+                    .child(instructorId =>
                       S.list()
-                        .title("Instructor Options")
+                        .title('Instructor Options')
                         .items([
                           // Option to edit instructor details
                           S.listItem()
-                            .title("Edit Instructor Details")
+                            .title('Edit Instructor Details')
                             .child(
                               S.document()
-                                .schemaType("instructor")
+                                .schemaType('instructor')
                                 .documentId(instructorId)
                             ),
                           // Option to view instructor's courses
                           S.listItem()
-                            .title("View Courses")
+                            .title('View Courses')
                             .child(
                               S.documentList()
                                 .title("Instructor's Courses")
@@ -80,29 +80,29 @@ export const structure = (S: StructureBuilder) =>
                 ),
               // Students with options
               S.listItem()
-                .title("Students")
-                .schemaType("student")
+                .title('Students')
+                .schemaType('student')
                 .child(
-                  S.documentTypeList("student")
-                    .title("Students")
-                    .child((studentId) =>
+                  S.documentTypeList('student')
+                    .title('Students')
+                    .child(studentId =>
                       S.list()
-                        .title("Student Options")
+                        .title('Student Options')
                         .items([
                           // Option to edit student details
                           S.listItem()
-                            .title("Edit Student Details")
+                            .title('Edit Student Details')
                             .child(
                               S.document()
-                                .schemaType("student")
+                                .schemaType('student')
                                 .documentId(studentId)
                             ),
                           // Option to view enrollments
                           S.listItem()
-                            .title("View Enrollments")
+                            .title('View Enrollments')
                             .child(
                               S.documentList()
-                                .title("Student Enrollments")
+                                .title('Student Enrollments')
                                 .filter(
                                   '_type == "enrollment" && student._ref == $studentId'
                                 )
@@ -110,17 +110,17 @@ export const structure = (S: StructureBuilder) =>
                             ),
                           // Option to view completed lessons
                           S.listItem()
-                            .title("View Completed Lessons")
+                            .title('View Completed Lessons')
                             .child(
                               S.documentList()
-                                .title("Completed Lessons")
-                                .schemaType("lessonCompletion")
+                                .title('Completed Lessons')
+                                .schemaType('lessonCompletion')
                                 .filter(
                                   '_type == "lessonCompletion" && student._ref == $studentId'
                                 )
                                 .params({ studentId })
                                 .defaultOrdering([
-                                  { field: "completedAt", direction: "desc" },
+                                  { field: 'completedAt', direction: 'desc' },
                                 ])
                             ),
                         ])
@@ -133,10 +133,10 @@ export const structure = (S: StructureBuilder) =>
 
       // System Management
       S.listItem()
-        .title("System Management")
+        .title('System Management')
         .child(
           S.list()
-            .title("System Management")
-            .items([S.documentTypeListItem("category").title("Categories")])
+            .title('System Management')
+            .items([S.documentTypeListItem('category').title('Categories')])
         ),
     ]);

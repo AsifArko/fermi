@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { Progress } from '@/components/ui/progress';
+import { cn } from '@/lib/utils';
 
 interface CourseProgressProps {
   progress: number;
-  variant?: "default" | "success";
-  size?: "default" | "sm";
+  variant?: 'default' | 'success';
+  size?: 'default' | 'sm';
   showPercentage?: boolean;
   label?: string;
   className?: string;
@@ -14,8 +14,8 @@ interface CourseProgressProps {
 
 export function CourseProgress({
   progress,
-  variant = "default",
-  size = "default",
+  variant = 'default',
+  size = 'default',
   showPercentage = true,
   label,
   className,
@@ -23,7 +23,7 @@ export function CourseProgress({
   return (
     <div
       className={cn(
-        "bg-card border border-border rounded-xl p-4 shadow-sm flex flex-col gap-3 w-full max-w-md mx-auto",
+        'bg-card border border-border rounded-xl p-4 shadow-sm flex flex-col gap-3 w-full max-w-md mx-auto',
         className
       )}
     >
@@ -44,9 +44,9 @@ export function CourseProgress({
       <Progress
         value={progress}
         className={cn(
-          "h-1 rounded-full bg-muted [&>div]:rounded-full shadow-inner transition-all",
-          size === "sm" && "h-0.5",
-          variant === "success" && "[&>div]:bg-emerald-600"
+          'h-1 rounded-full bg-muted [&>div]:rounded-full shadow-inner transition-all',
+          size === 'sm' && 'h-0.5',
+          variant === 'success' && '[&>div]:bg-emerald-600'
         )}
       />
     </div>

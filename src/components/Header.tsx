@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
-import { SearchInput } from "./SearchInput";
-import { Button } from "./ui/button";
-import DarkModeToggle from "./DarkModeToggle";
-import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
-import MobileSidebar from "./MobileSidebar";
+import { useState, useEffect } from 'react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+import { SearchInput } from './SearchInput';
+import { Button } from './ui/button';
+import DarkModeToggle from './DarkModeToggle';
+import { usePathname } from 'next/navigation';
+import { Menu } from 'lucide-react';
+import MobileSidebar from './MobileSidebar';
 
 export default function Header() {
   const pathname = usePathname();
@@ -23,10 +23,10 @@ export default function Header() {
 
   const hideHeader =
     mounted &&
-    (pathname?.includes("/dashboard/courses/") ||
-      pathname?.includes("/lessons/") ||
-      pathname?.includes("/studio/") ||
-      pathname?.includes("/studio/structure"));
+    (pathname?.includes('/dashboard/courses/') ||
+      pathname?.includes('/lessons/') ||
+      pathname?.includes('/studio/') ||
+      pathname?.includes('/studio/structure'));
 
   if (hideHeader) return null;
 
@@ -80,7 +80,7 @@ export default function Header() {
               <Link href="/my-courses">
                 <Button
                   className="px-4 py-1.5 h-auto text-sm font-semibold rounded-md bg-background text-primary border border-border shadow-none hover:bg-primary/10 hover:text-primary transition-all duration-200"
-                  style={{ minWidth: 0, boxShadow: "none" }}
+                  style={{ minWidth: 0, boxShadow: 'none' }}
                 >
                   My Courses
                 </Button>

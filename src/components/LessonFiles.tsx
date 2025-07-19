@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 import {
   ChevronDown,
   Download,
   FileText,
   FileSpreadsheet,
   File,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type LessonFile = {
   _key: string;
@@ -43,13 +43,13 @@ export function LessonFiles({ files }: LessonFilesProps) {
 
   const getFileIcon = (filename: string | null) => {
     if (!filename) return <File className="h-3.5 w-3.5" />;
-    const extension = filename.split(".").pop()?.toLowerCase();
+    const extension = filename.split('.').pop()?.toLowerCase();
     switch (extension) {
-      case "pdf":
+      case 'pdf':
         return <FileText className="h-3.5 w-3.5" />;
-      case "csv":
+      case 'csv':
         return <FileSpreadsheet className="h-3.5 w-3.5" />;
-      case "txt":
+      case 'txt':
         return <File className="h-3.5 w-3.5" />;
       default:
         return <File className="h-3.5 w-3.5" />;
@@ -57,14 +57,14 @@ export function LessonFiles({ files }: LessonFilesProps) {
   };
 
   const getFileType = (filename: string | null) => {
-    if (!filename) return "FILE";
-    const extension = filename.split(".").pop()?.toUpperCase();
-    return extension || "FILE";
+    if (!filename) return 'FILE';
+    const extension = filename.split('.').pop()?.toUpperCase();
+    return extension || 'FILE';
   };
 
   const handleDownload = async (file: LessonFile) => {
     if (!file.asset || !file.title) {
-      console.error("File asset or title is missing");
+      console.error('File asset or title is missing');
       return;
     }
 
@@ -72,7 +72,7 @@ export function LessonFiles({ files }: LessonFilesProps) {
       // Use the asset ID directly since we now have the expanded asset
       const assetId = file.asset._id;
 
-      console.log("Downloading file:", {
+      console.log('Downloading file:', {
         title: file.title,
         assetId: assetId,
         originalFilename: file.asset.originalFilename,
@@ -81,7 +81,7 @@ export function LessonFiles({ files }: LessonFilesProps) {
 
       // If we have a direct URL from Sanity, use it
       if (file.asset.url) {
-        window.open(file.asset.url, "_blank");
+        window.open(file.asset.url, '_blank');
         return;
       }
 
@@ -89,16 +89,16 @@ export function LessonFiles({ files }: LessonFilesProps) {
       const downloadUrl = `/api/files/${assetId}`;
 
       // Create a temporary link and trigger download
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       link.href = downloadUrl;
       link.download = file.title;
-      link.target = "_blank";
+      link.target = '_blank';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      console.error("Error downloading file:", error);
-      alert("Failed to download file. Please try again.");
+      console.error('Error downloading file:', error);
+      alert('Failed to download file. Please try again.');
     }
   };
 
@@ -117,15 +117,15 @@ export function LessonFiles({ files }: LessonFilesProps) {
         </div>
         <ChevronDown
           className={cn(
-            "h-3.5 w-3.5 transition-transform duration-200",
-            isOpen && "rotate-180"
+            'h-3.5 w-3.5 transition-transform duration-200',
+            isOpen && 'rotate-180'
           )}
         />
       </Button>
 
       {isOpen && (
         <div className="mt-3 space-y-2">
-          {files.map((file) => (
+          {files.map(file => (
             <div
               key={file._key}
               className="flex items-center justify-between p-2.5 bg-background rounded-md border border-border/50"
@@ -135,7 +135,7 @@ export function LessonFiles({ files }: LessonFilesProps) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="text-xs font-medium truncate">
-                      {file.title || "Untitled File"}
+                      {file.title || 'Untitled File'}
                     </span>
                     <span className="text-xs text-muted-foreground bg-muted px-1 py-0.5 rounded text-[10px]">
                       {getFileType(file.title)}

@@ -1,6 +1,6 @@
-import { searchCourses } from "@/sanity/lib/courses/searchCourses";
-import { Search } from "lucide-react";
-import { CourseCard } from "@/components/CourseCard";
+import { searchCourses } from '@/sanity/lib/courses/searchCourses';
+import { Search } from 'lucide-react';
+import { CourseCard } from '@/components/CourseCard';
 
 interface SearchPageProps {
   params: Promise<{
@@ -21,7 +21,7 @@ export default async function SearchPage({ params }: SearchPageProps) {
           <div>
             <h1 className="text-3xl font-bold">Search Results</h1>
             <p className="text-muted-foreground">
-              Found {courses.length} result{courses.length === 1 ? "" : "s"} for
+              Found {courses.length} result{courses.length === 1 ? '' : 's'} for
               &quot;{term}&quot;
             </p>
           </div>
@@ -36,7 +36,7 @@ export default async function SearchPage({ params }: SearchPageProps) {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {courses.map((course) => (
+            {courses.map(course => (
               <CourseCard
                 key={course._id}
                 course={course}

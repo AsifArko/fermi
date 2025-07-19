@@ -1,13 +1,13 @@
-"use client";
+'use client';
 
-import { CheckCircle, Loader2, XCircle } from "lucide-react";
-import { Button } from "./ui/button";
-import { useState, useEffect, useTransition } from "react";
-import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { getLessonCompletionStatusAction } from "@/actions/getLessonCompletionStatusAction";
-import { completeLessonAction } from "@/actions/completeLessonAction";
-import { uncompleteLessonAction } from "@/actions/uncompleteLessonAction";
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { Button } from './ui/button';
+import { useState, useEffect, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { getLessonCompletionStatusAction } from '@/actions/getLessonCompletionStatusAction';
+import { completeLessonAction } from '@/actions/completeLessonAction';
+import { uncompleteLessonAction } from '@/actions/uncompleteLessonAction';
 
 interface LessonCompleteButtonProps {
   lessonId: string;
@@ -71,17 +71,17 @@ export function LessonCompleteButton({
       size="icon"
       variant="default"
       className={cn(
-        "fixed bottom-4 right-4 z-50 rounded-full shadow-lg transition-all duration-200 ease-in-out",
+        'fixed bottom-4 right-4 z-50 rounded-full shadow-lg transition-all duration-200 ease-in-out',
         isCompleted
-          ? "bg-gray-600 hover:bg-gray-700 text-white"
-          : "bg-green-600 hover:bg-green-700 text-white"
+          ? 'bg-gray-600 hover:bg-gray-700 text-white'
+          : 'bg-green-600 hover:bg-green-700 text-white'
       )}
       aria-label={
         isLoading
-          ? "Updating lesson status"
+          ? 'Updating lesson status'
           : isCompleted
-            ? "Mark as Not Complete"
-            : "Mark as Complete"
+            ? 'Mark as Not Complete'
+            : 'Mark as Complete'
       }
     >
       {isLoading ? (

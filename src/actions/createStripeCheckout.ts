@@ -1,13 +1,13 @@
-"use server";
+'use server';
 
-import stripe from "@/lib/stripe";
-import baseUrl from "@/lib/baseUrl";
+import stripe from '@/lib/stripe';
+import baseUrl from '@/lib/baseUrl';
 
-import { urlFor } from "@/sanity/lib/image";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
-import { createStudentIfNotExists } from "@/sanity/lib/student/createStudentIfNotExists";
-import { clerkClient } from "@clerk/nextjs/server";
-import { createEnrollment } from "@/sanity/lib/student/createEnrollment";
+import { urlFor } from '@/sanity/lib/image';
+import getCourseById from '@/sanity/lib/courses/getCourseById';
+import { createStudentIfNotExists } from '@/sanity/lib/student/createStudentIfNotExists';
+import { clerkClient } from '@clerk/nextjs/server';
+import { createEnrollment } from '@/sanity/lib/student/createEnrollment';
 
 export async function createStripeCheckout(courseId: string, userId: string) {
   try {
@@ -18,29 +18,29 @@ export async function createStripeCheckout(courseId: string, userId: string) {
     const email = emailAddresses[0]?.emailAddress;
 
     if (!emailAddresses || !email) {
-      throw new Error("User details not found");
+      throw new Error('User details not found');
     }
 
     if (!course) {
-      throw new Error("Course not found");
+      throw new Error('Course not found');
     }
 
     // mid step - create a user in sanity if it doesn't exist
     const user = await createStudentIfNotExists({
       clerkId: userId,
-      email: email || "",
+      email: email || '',
       firstName: firstName || email,
-      lastName: lastName || "",
-      imageUrl: imageUrl || "",
+      lastName: lastName || '',
+      imageUrl: imageUrl || '',
     });
 
     if (!user) {
-      throw new Error("User not found");
+      throw new Error('User not found');
     }
 
     // 2. Validate course data and prepare price for Stripe
     if (!course.price && course.price !== 0) {
-      throw new Error("Course price is not set");
+      throw new Error('Course price is not set');
     }
     const priceInCents = Math.round(course.price * 100);
 
@@ -49,7 +49,7 @@ export async function createStripeCheckout(courseId: string, userId: string) {
       await createEnrollment({
         studentId: user._id,
         courseId: course._id,
-        paymentId: "free",
+        paymentId: 'free',
         amount: 0,
       });
 
@@ -59,7 +59,7 @@ export async function createStripeCheckout(courseId: string, userId: string) {
     const { title, description, image, slug } = course;
 
     if (!title || !description || !image || !slug) {
-      throw new Error("Course data is incomplete");
+      throw new Error('Course data is incomplete');
     }
 
     // 3. Create and configure Stripe Checkout Session with course details
@@ -67,18 +67,18 @@ export async function createStripeCheckout(courseId: string, userId: string) {
       line_items: [
         {
           price_data: {
-            currency: "usd",
+            currency: 'usd',
             product_data: {
               name: title,
               description: description,
-              images: [urlFor(image).url() || ""],
+              images: [urlFor(image).url() || ''],
             },
             unit_amount: priceInCents,
           },
           quantity: 1,
         },
       ],
-      mode: "payment",
+      mode: 'payment',
       success_url: `${baseUrl}/courses/${slug.current}?success=true`,
       cancel_url: `${baseUrl}/courses/${slug.current}?canceled=true`,
       metadata: {

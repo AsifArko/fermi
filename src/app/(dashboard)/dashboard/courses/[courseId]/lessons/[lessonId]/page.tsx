@@ -1,12 +1,12 @@
-import { redirect } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
-import { getLessonById } from "@/sanity/lib/lessons/getLessonById";
-import { PortableText } from "@portabletext/react";
-import { VideoPlayer } from "@/components/VideoPlayer";
-import { LoomEmbed } from "@/components/LoomEmbed";
-import { LessonCompleteButton } from "@/components/LessonCompleteButton";
-import { LessonFiles } from "@/components/LessonFiles";
-import lessonPortableTextComponents from "@/components/lessonPortableTextComponents";
+import { redirect } from 'next/navigation';
+import { currentUser } from '@clerk/nextjs/server';
+import { getLessonById } from '@/sanity/lib/lessons/getLessonById';
+import { PortableText } from '@portabletext/react';
+import { VideoPlayer } from '@/components/VideoPlayer';
+import { LoomEmbed } from '@/components/LoomEmbed';
+import { LessonCompleteButton } from '@/components/LessonCompleteButton';
+import { LessonFiles } from '@/components/LessonFiles';
+import lessonPortableTextComponents from '@/components/lessonPortableTextComponents';
 
 interface LessonPageProps {
   params: Promise<{
@@ -18,7 +18,7 @@ interface LessonPageProps {
 export default async function LessonPage({ params }: LessonPageProps) {
   const user = await currentUser();
   if (!user) {
-    return redirect("/"); // or your login page
+    return redirect('/'); // or your login page
   }
 
   const { courseId, lessonId } = await params;
@@ -57,13 +57,27 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 <LessonFiles
                   files={
                     lesson.files
-                      ?.filter((file) => file && file.asset && file.title)
-                      .map((file) => ({
-                        _key: file._key,
-                        asset: file.asset!,
-                        title: file.title!,
-                        description: file.description,
-                      })) || []
+                      ?.filter(
+                        (file: {
+                          _key: string;
+                          asset: { _ref: string; _type: 'reference' };
+                          title: string;
+                          description?: string;
+                        }) => file && file.asset && file.title
+                      )
+                      .map(
+                        (file: {
+                          _key: string;
+                          asset: { _ref: string; _type: 'reference' };
+                          title: string;
+                          description?: string;
+                        }) => ({
+                          _key: file._key,
+                          asset: file.asset!,
+                          title: file.title!,
+                          description: file.description,
+                        })
+                      ) || []
                   }
                 />
               </div>

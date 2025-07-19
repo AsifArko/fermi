@@ -1,5 +1,5 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
 
 export async function getEnrolledCourses(clerkId: string) {
   const getEnrolledCoursesQuery =
@@ -24,7 +24,7 @@ export async function getEnrolledCourses(clerkId: string) {
     result?.data?.enrolledCourses?.filter(
       (e, i, arr) =>
         e?.course?._id &&
-        arr.findIndex((x) => x?.course?._id === e?.course?._id) === i
+        arr.findIndex(x => x?.course?._id === e?.course?._id) === i
     ) || []
   );
 }

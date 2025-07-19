@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { uncompleteLessonById } from "@/sanity/lib/lessons/uncompleteLessonById";
+import { uncompleteLessonById } from '@/sanity/lib/lessons/uncompleteLessonById';
 
 export async function uncompleteLessonAction(
   lessonId: string,
@@ -10,7 +10,7 @@ export async function uncompleteLessonAction(
     await uncompleteLessonById({ lessonId, clerkId });
     return { success: true };
   } catch (error) {
-    console.error("Error uncompleting lesson:", error);
-    throw new Error("Failed to uncomplete lesson");
+    console.error('Error uncompleting lesson:', error);
+    throw new Error('Failed to uncomplete lesson');
   }
 }

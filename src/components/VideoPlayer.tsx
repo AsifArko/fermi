@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import ReactPlayer from "react-player";
+import ReactPlayer from 'react-player';
 
 interface VideoPlayerProps {
   url: string;

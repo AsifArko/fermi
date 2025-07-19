@@ -1,6 +1,6 @@
-import { defineQuery } from "groq";
-import { sanityFetch } from "../live";
-import { getStudentByClerkId } from "../student/getStudentByClerkId";
+import { defineQuery } from 'groq';
+import { sanityFetch } from '../live';
+import { getStudentByClerkId } from '../student/getStudentByClerkId';
 
 export async function getLessonCompletionStatus(
   lessonId: string,
@@ -10,7 +10,7 @@ export async function getLessonCompletionStatus(
   const student = await getStudentByClerkId(clerkId);
 
   if (!student?._id) {
-    throw new Error("Student not found");
+    throw new Error('Student not found');
   }
 
   const completionStatusQuery =

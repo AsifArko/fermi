@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
-import { projectId, dataset } from "@/sanity/env";
+import { NextRequest, NextResponse } from 'next/server';
+import { projectId, dataset } from '@/sanity/env';
 
 export async function GET(
   request: NextRequest,
@@ -10,7 +10,7 @@ export async function GET(
 
     if (!assetId) {
       return NextResponse.json(
-        { error: "Asset ID is required" },
+        { error: 'Asset ID is required' },
         { status: 400 }
       );
     }
@@ -18,23 +18,23 @@ export async function GET(
     // Construct the Sanity asset URL - assetId is now the full Sanity document ID
     const assetUrl = `https://cdn.sanity.io/files/${projectId}/${dataset}/${assetId}`;
 
-    console.log("Attempting to fetch file from:", assetUrl);
+    console.log('Attempting to fetch file from:', assetUrl);
 
     // Fetch the file from Sanity
     const response = await fetch(assetUrl);
 
-    console.log("Response status:", response.status);
+    console.log('Response status:', response.status);
     console.log(
-      "Response headers:",
+      'Response headers:',
       Object.fromEntries(response.headers.entries())
     );
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Sanity response error:", errorText);
+      console.error('Sanity response error:', errorText);
       return NextResponse.json(
         {
-          error: "File not found",
+          error: 'File not found',
           details: errorText,
           assetUrl,
           assetId,
@@ -47,21 +47,21 @@ export async function GET(
     const blob = await response.blob();
 
     // Get filename from URL or use asset ID
-    const filename = assetId.includes(".") ? assetId : `${assetId}.pdf`;
+    const filename = assetId.includes('.') ? assetId : `${assetId}.pdf`;
 
     // Return the file with proper headers
     return new NextResponse(blob, {
       headers: {
-        "Content-Type":
-          response.headers.get("Content-Type") || "application/octet-stream",
-        "Content-Disposition": `attachment; filename="${filename}"`,
-        "Cache-Control": "public, max-age=3600", // Cache for 1 hour
+        'Content-Type':
+          response.headers.get('Content-Type') || 'application/octet-stream',
+        'Content-Disposition': `attachment; filename="${filename}"`,
+        'Cache-Control': 'public, max-age=3600', // Cache for 1 hour
       },
     });
   } catch (error) {
-    console.error("Error serving file:", error);
+    console.error('Error serving file:', error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }

@@ -1,30 +1,30 @@
-"use client";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, Library, ChevronRight, Play, X, Check } from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+'use client';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Library, ChevronRight, Play, X, Check } from 'lucide-react';
+import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { CourseProgress } from "@/components/CourseProgress";
-import { calculateCourseProgress } from "@/lib/courseProgress";
+} from '@/components/ui/tooltip';
+import { CourseProgress } from '@/components/CourseProgress';
+import { calculateCourseProgress } from '@/lib/courseProgress';
 import {
   GetCompletionsQueryResult,
   GetCourseByIdQueryResult,
   Module,
-} from "../../sanity.types";
-import DarkModeToggle from "./DarkModeToggle";
-import { useSidebar } from "./providers/SidebarProvider";
+} from '../../sanity.types';
+import DarkModeToggle from './DarkModeToggle';
+import { useSidebar } from './providers/SidebarProvider';
 
 interface SidebarProps {
   course: GetCourseByIdQueryResult;
-  completedLessons?: GetCompletionsQueryResult["completedLessons"];
+  completedLessons?: GetCompletionsQueryResult['completedLessons'];
 }
 
 export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
@@ -35,16 +35,16 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
 
   useEffect(() => {
     if (pathname && course?.modules) {
-      const currentModuleId = course.modules.find((module) =>
+      const currentModuleId = course.modules.find(module =>
         module.lessons?.some(
-          (lesson) =>
+          lesson =>
             pathname ===
             `/dashboard/courses/${course._id}/lessons/${lesson._id}`
         )
       )?._id;
 
       if (currentModuleId && !openModules.includes(currentModuleId)) {
-        setOpenModules((prev) => [...prev, currentModuleId]);
+        setOpenModules(prev => [...prev, currentModuleId]);
       }
     }
   }, [pathname, course, openModules]);
@@ -108,7 +108,7 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
             >
               <div className="flex items-center gap-x-3 mb-2">
                 <span className="text-lg font-bold text-muted-foreground min-w-[28px]">
-                  {String(moduleIndex + 1).padStart(2, "0")}
+                  {String(moduleIndex + 1).padStart(2, '0')}
                 </span>
                 <div className="flex flex-col text-left flex-1 min-w-0">
                   <p className="text-base font-semibold truncate text-primary/90">
@@ -125,7 +125,7 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
                     pathname ===
                     `/dashboard/courses/${course._id}/lessons/${lesson._id}`;
                   const isCompleted = completedLessons.some(
-                    (completion) => completion.lesson?._id === lesson._id
+                    completion => completion.lesson?._id === lesson._id
                   );
                   return (
                     <Link
@@ -134,31 +134,31 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
                       href={`/dashboard/courses/${course._id}/lessons/${lesson._id}`}
                       onClick={close}
                       className={cn(
-                        "flex items-center px-3 py-2 gap-x-3 transition-all duration-150 relative hover:bg-muted/40",
-                        isActive && "border-l-2 border-gray-500 bg-primary/10",
-                        isCompleted && "text-muted-foreground"
+                        'flex items-center px-3 py-2 gap-x-3 transition-all duration-150 relative hover:bg-muted/40',
+                        isActive && 'border-l-2 border-gray-500 bg-primary/10',
+                        isCompleted && 'text-muted-foreground'
                       )}
                     >
                       <span className="text-xs font-medium text-muted-foreground min-w-[28px]">
-                        {String(lessonIndex + 1).padStart(2, "0")}
+                        {String(lessonIndex + 1).padStart(2, '0')}
                       </span>
                       {isCompleted ? (
                         <Check className="h-4 w-4 shrink-0 text-gray-500" />
                       ) : (
                         <Play
                           className={cn(
-                            "h-4 w-4 shrink-0",
+                            'h-4 w-4 shrink-0',
                             isActive
-                              ? "text-primary"
-                              : "text-muted-foreground group-hover:text-primary/80"
+                              ? 'text-primary'
+                              : 'text-muted-foreground group-hover:text-primary/80'
                           )}
                         />
                       )}
                       <span
                         className={cn(
-                          "text-sm font-normal line-clamp-2 min-w-0",
+                          'text-sm font-normal line-clamp-2 min-w-0',
                           isCompleted &&
-                            "text-muted-foreground line-through decoration-gray-500/40"
+                            'text-muted-foreground line-through decoration-gray-500/40'
                         )}
                       >
                         {lesson.title}
@@ -202,8 +202,8 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
               >
                 <ChevronRight
                   className={cn(
-                    "h-5 w-5 transition-transform",
-                    isOpen && "rotate-180"
+                    'h-5 w-5 transition-transform',
+                    isOpen && 'rotate-180'
                   )}
                 />
               </Button>
@@ -218,11 +218,11 @@ export function Sidebar({ course, completedLessons = [] }: SidebarProps) {
       {/* Main Sidebar - Desktop & Mobile */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 bg-background transition-all duration-300 ease-in-out",
-          "lg:z-50 lg:block lg:w-96 lg:border-r",
+          'fixed inset-y-0 left-0 z-40 bg-background transition-all duration-300 ease-in-out',
+          'lg:z-50 lg:block lg:w-96 lg:border-r',
           isOpen
-            ? "w-[calc(100%-60px)] translate-x-[60px] lg:translate-x-0 lg:w-96"
-            : "translate-x-[-100%] lg:translate-x-0"
+            ? 'w-[calc(100%-60px)] translate-x-[60px] lg:translate-x-0 lg:w-96'
+            : 'translate-x-[-100%] lg:translate-x-0'
         )}
       >
         <div className="h-full">

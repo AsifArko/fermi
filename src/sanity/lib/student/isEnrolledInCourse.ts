@@ -1,5 +1,5 @@
-import groq from "groq";
-import { sanityFetch } from "../live";
+import groq from 'groq';
+import { sanityFetch } from '../live';
 
 export async function isEnrolledInCourse(clerkId: string, courseId: string) {
   try {
@@ -11,7 +11,7 @@ export async function isEnrolledInCourse(clerkId: string, courseId: string) {
     });
 
     if (!studentId) {
-      console.log("No student found with clerkId:", clerkId);
+      console.log('No student found with clerkId:', clerkId);
       return false;
     }
 
@@ -24,7 +24,7 @@ export async function isEnrolledInCourse(clerkId: string, courseId: string) {
 
     return !!enrollment.data;
   } catch (error) {
-    console.error("Error checking enrollment status:", error);
+    console.error('Error checking enrollment status:', error);
     return false;
   }
 }

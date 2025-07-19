@@ -1,14 +1,14 @@
-"use client";
-import React from "react";
-import { usePathname } from "next/navigation";
+'use client';
+import React from 'react';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
   const pathname = usePathname();
   const hideFooter =
-    pathname?.includes("/dashboard/courses/") ||
-    pathname?.includes("/lessons/") ||
-    pathname?.includes("/studio/") ||
-    pathname?.includes("/studio/structure");
+    pathname?.includes('/dashboard/courses/') ||
+    pathname?.includes('/lessons/') ||
+    pathname?.includes('/studio/') ||
+    pathname?.includes('/studio/structure');
   if (hideFooter) return null;
 
   return (
@@ -16,7 +16,7 @@ const Footer = () => {
       {/* Subtle Computer SVG - bottom left, slow float */}
       <div
         className="absolute bottom-2 left-4 opacity-20 animate-float-slow pointer-events-none"
-        style={{ animationDuration: "12s" }}
+        style={{ animationDuration: '12s' }}
       >
         <svg
           width="28"
@@ -33,7 +33,7 @@ const Footer = () => {
       {/* Subtle Molecule SVG - bottom right, slow spin */}
       <div
         className="absolute bottom-2 right-4 opacity-20 animate-spin-slow pointer-events-none"
-        style={{ animationDuration: "22s" }}
+        style={{ animationDuration: '22s' }}
       >
         <svg
           width="28"
