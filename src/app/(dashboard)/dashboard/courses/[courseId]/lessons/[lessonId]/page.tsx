@@ -8,6 +8,20 @@ import { LessonCompleteButton } from '@/components/LessonCompleteButton';
 import { LessonFiles } from '@/components/LessonFiles';
 import lessonPortableTextComponents from '@/components/lessonPortableTextComponents';
 
+type LessonFile = {
+  _key: string;
+  asset: {
+    _id: string;
+    _type: string;
+    originalFilename?: string;
+    url?: string;
+    mimeType?: string;
+    size?: number;
+  } | null;
+  title: string;
+  description?: string;
+};
+
 interface LessonPageProps {
   params: Promise<{
     courseId: string;
@@ -56,28 +70,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
               <div>
                 <LessonFiles
                   files={
-                    lesson.files
-                      ?.filter(
-                        (file: {
-                          _key: string;
-                          asset: { _ref: string; _type: 'reference' };
-                          title: string;
-                          description?: string;
-                        }) => file && file.asset && file.title
-                      )
-                      .map(
-                        (file: {
-                          _key: string;
-                          asset: { _ref: string; _type: 'reference' };
-                          title: string;
-                          description?: string;
-                        }) => ({
-                          _key: file._key,
-                          asset: file.asset!,
-                          title: file.title!,
-                          description: file.description,
-                        })
-                      ) || []
+                    lesson.files?.filter(
+                      (file: LessonFile) => file && file.asset && file.title
+                    ) || []
                   }
                 />
               </div>

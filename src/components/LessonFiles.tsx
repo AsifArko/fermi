@@ -26,8 +26,8 @@ type LessonFile = {
     mimeType?: string;
     size?: number;
   } | null;
-  title: string | null;
-  description: string | null;
+  title: string;
+  description?: string;
 };
 
 interface LessonFilesProps {
