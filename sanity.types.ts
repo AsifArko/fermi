@@ -244,6 +244,7 @@ export type Code = {
     | 'python'
     | 'java'
     | 'cpp'
+    | 'c'
     | 'csharp'
     | 'php'
     | 'ruby'
@@ -258,6 +259,7 @@ export type Code = {
     | 'yaml'
     | 'markdown'
     | 'shell'
+    | 'latex'
     | 'text';
 };
 

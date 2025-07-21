@@ -1290,6 +1290,10 @@
               },
               {
                 "type": "string",
+                "value": "c"
+              },
+              {
+                "type": "string",
                 "value": "csharp"
               },
               {
@@ -1343,6 +1347,10 @@
               {
                 "type": "string",
                 "value": "shell"
+              },
+              {
+                "type": "string",
+                "value": "latex"
               },
               {
                 "type": "string",
