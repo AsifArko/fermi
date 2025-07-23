@@ -490,10 +490,6 @@ export default function AssetManagerPage() {
                 <FolderOpen className="w-8 h-8 text-primary" />
                 Asset Manager
               </h1>
-              <p className="text-muted-foreground">
-                Manage your uploaded files and images • {assets.length} total
-                assets
-              </p>
             </div>
 
             <Button
@@ -608,7 +604,7 @@ export default function AssetManagerPage() {
                 </h2>
               </div>
 
-              <div className="max-h-[600px] overflow-y-auto">
+              <div className="max-h-[550px] overflow-y-auto">
                 {groupBy === 'none'
                   ? // Regular list without grouping
                     sortedAssets.map(asset => (
