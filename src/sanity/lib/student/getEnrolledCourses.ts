@@ -10,7 +10,10 @@ export async function getEnrolledCourses(clerkId: string) {
         ...,
         "slug": slug.current,
         "category": category->{...},
-        "instructor": instructor->{...}
+        "instructor": instructor->{
+          ...,
+          "photo": photo.asset->url
+        }
       }
     }
   }`);
@@ -22,7 +25,11 @@ export async function getEnrolledCourses(clerkId: string) {
 
   return (
     result?.data?.enrolledCourses?.filter(
-      (e, i, arr) =>
+      (
+        e: { course?: { _id: string } },
+        i: number,
+        arr: { course?: { _id: string } }[]
+      ) =>
         e?.course?._id &&
         arr.findIndex(x => x?.course?._id === e?.course?._id) === i
     ) || []
