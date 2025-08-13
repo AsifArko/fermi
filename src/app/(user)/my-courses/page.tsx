@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { GraduationCap } from 'lucide-react';
 import { getCourseProgress } from '@/sanity/lib/courses/getCourseProgress';
 import { MobileResponsiveCourseCard } from '@/components/shared/MobileResponsiveCourseCard';
+import { MyCoursesGrid } from '@/components/layout';
 import { generateRandomHash } from '@/lib/utils';
 import { GetCoursesQyeryResult } from '../../../sanity.types';
 
@@ -32,12 +33,14 @@ export default async function MyCoursesPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto relative z-10">
       <div className="h-full pt-16">
         <div className="container mx-auto px-4 py-8">
           <div className="flex items-center gap-4 mb-8">
-            <GraduationCap className="h-8 w-8 text-primary" />
-            <h1 className="text-3xl font-bold">My Courses</h1>
+            <GraduationCap className="h-8 w-8 text-gray-600 dark:text-gray-400 stroke-[1.5]" />
+            <h1 className="text-4xl font-light text-gray-800 dark:text-gray-200 tracking-tight">
+              My Courses
+            </h1>
           </div>
 
           {enrolledCourses.length === 0 ? (
@@ -56,7 +59,7 @@ export default async function MyCoursesPage() {
               </Link>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <MyCoursesGrid>
               {coursesWithProgress.map(item => {
                 if (!item || !item.course) return null;
 
@@ -66,11 +69,11 @@ export default async function MyCoursesPage() {
                     course={item.course}
                     progress={item.progress}
                     href={`/dashboard/courses/${item.course._id}`}
-                    variant="default"
+                    variant="featured"
                   />
                 );
               })}
-            </div>
+            </MyCoursesGrid>
           )}
         </div>
       </div>

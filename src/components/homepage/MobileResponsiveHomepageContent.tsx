@@ -1,14 +1,12 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { MobileResponsiveCategoryFilter } from './MobileResponsiveCategoryFilter';
 import { ScientificHero } from './ScientificHero';
-import { StatsSection } from './StatsSection';
 import { FeaturedCoursesSection } from './FeaturedCoursesSection';
-import { GetCoursesQueryResult } from '../../../sanity.types';
+import { EnhancedCourse } from '@/sanity/lib/courses/getCourses';
 
 interface MobileResponsiveHomepageContentProps {
-  courses: GetCoursesQueryResult;
+  courses: EnhancedCourse[];
 }
 
 export function MobileResponsiveHomepageContent({
@@ -26,11 +24,6 @@ export function MobileResponsiveHomepageContent({
     }, []);
   }, [courses]);
 
-  // Count unique instructors
-  const uniqueInstructors = useMemo(() => {
-    return new Set(courses.map(course => course.instructor?.name)).size;
-  }, [courses]);
-
   // Filter courses based on selected category
   const filteredCourses = useMemo(() => {
     if (!selectedCategory) return courses;
@@ -42,31 +35,17 @@ export function MobileResponsiveHomepageContent({
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16 sm:pt-20">
+    <div className="min-h-screen pt-16 sm:pt-20 relative z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Scientific Hero Section */}
         <ScientificHero />
 
-        {/* Category Filter */}
-        <MobileResponsiveCategoryFilter
-          categories={categories}
-          onCategoryChange={handleCategoryChange}
-          selectedCategory={selectedCategory}
-        />
-
-        {/* Stats Section */}
-        <StatsSection
-          coursesCount={courses.length}
-          categoriesCount={categories.length}
-          instructorsCount={uniqueInstructors}
-          filteredCoursesCount={filteredCourses.length}
-        />
-
-        {/* Featured Courses Section */}
+        {/* Featured Courses Section - Now includes the category filter */}
         <FeaturedCoursesSection
           filteredCourses={filteredCourses}
           selectedCategory={selectedCategory}
           onCategoryChange={handleCategoryChange}
+          categories={categories}
         />
       </div>
     </div>

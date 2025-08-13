@@ -2,14 +2,23 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Play, GraduationCap } from 'lucide-react';
+import {
+  Play,
+  GraduationCap,
+  Library,
+  Tv,
+  Brackets,
+  FileText,
+  LayoutGrid,
+} from 'lucide-react';
 import { urlFor } from '@/sanity/lib/image';
 import { Loader } from '@/components/ui/loader';
-import { GetCoursesQueryResult } from '../../../sanity.types';
+import { EnhancedCourse } from '@/sanity/lib/courses/getCourses';
+import { getCourseStats } from '@/lib/courseUtils';
 import { useAuth } from '@clerk/nextjs';
 
 interface MobileResponsiveCourseCardProps {
-  course: GetCoursesQueryResult[number];
+  course: EnhancedCourse;
   progress?: number;
   href: string;
   variant?: 'default' | 'compact' | 'featured';
@@ -50,9 +59,9 @@ export function MobileResponsiveCourseCard({
         <div
           className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-700 overflow-hidden ${className}`}
         >
-          {/* Compact layout for mobile */}
+          {/* Compact layout for mobile - increased height */}
           <div className="flex">
-            {/* Image section */}
+            {/* Image section - reverted to original size */}
             <div className="relative w-24 h-24 flex-shrink-0">
               {course.image ? (
                 <Image
@@ -75,20 +84,20 @@ export function MobileResponsiveCourseCard({
               </div>
             </div>
 
-            {/* Content section */}
-            <div className="flex-1 p-3 flex flex-col justify-between">
+            {/* Content section - increased padding */}
+            <div className="flex-1 p-4 flex flex-col justify-between">
               <div>
-                <h3 className="font-semibold text-xs text-gray-900 dark:text-white line-clamp-2 mb-1">
+                <h3 className="font-semibold text-sm text-gray-900 dark:text-white line-clamp-2 mb-2">
                   {course.title}
                 </h3>
-                <div className="group/desc relative mb-2">
-                  <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-3">
+                <div className="group/desc relative mb-3">
+                  <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-4 text-justify leading-relaxed">
                     {course.description}
                   </p>
                   {/* Tooltip for full description */}
                   {course.description && course.description.length > 80 && (
                     <div className="absolute bottom-full left-0 right-0 mb-2 bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-200 rounded-lg p-3 opacity-0 group-hover/desc:opacity-100 transition-opacity duration-300 pointer-events-none z-20 shadow-lg border border-gray-700 dark:border-gray-600 max-w-xs">
-                      <p className="text-xs leading-relaxed">
+                      <p className="text-xs leading-relaxed text-justify">
                         {course.description}
                       </p>
                       {/* Arrow pointing down */}
@@ -96,11 +105,34 @@ export function MobileResponsiveCourseCard({
                     </div>
                   )}
                 </div>
+
+                {/* Metadata */}
+                <div className="flex items-center space-x-3 text-xs text-gray-500 dark:text-gray-400 mb-2">
+                  {(() => {
+                    const stats = getCourseStats(course);
+                    return (
+                      <>
+                        <div className="flex items-center space-x-1">
+                          <LayoutGrid className="w-3 h-3" />
+                          <span>{stats.modules}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Library className="w-3 h-3" />
+                          <span>{stats.lessons}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Tv className="w-3 h-3" />
+                          <span>{stats.videos}</span>
+                        </div>
+                      </>
+                    );
+                  })()}
+                </div>
               </div>
 
               {/* Progress component */}
               {isSignedIn && typeof progress === 'number' && (
-                <div className="mt-1.5">
+                <div className="mt-2">
                   <CourseProgress progress={progress} />
                 </div>
               )}
@@ -117,7 +149,7 @@ export function MobileResponsiveCourseCard({
         <div
           className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden ${className}`}
         >
-          {/* Featured image */}
+          {/* Featured image - reverted to original size */}
           <div className="relative h-48 sm:h-56 overflow-hidden">
             {course.image ? (
               <Image
@@ -155,6 +187,39 @@ export function MobileResponsiveCourseCard({
             </div>
           </div>
 
+          {/* Metadata under image */}
+          <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800/30">
+            <div className="flex items-center justify-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+              {(() => {
+                const stats = getCourseStats(course);
+                return (
+                  <>
+                    <div className="flex items-center space-x-1">
+                      <LayoutGrid className="w-3 h-3" />
+                      <span>{stats.modules}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Library className="w-3 h-3" />
+                      <span>{stats.lessons}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Tv className="w-3 h-3" />
+                      <span>{stats.videos}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Brackets className="w-3 h-3" />
+                      <span>{stats.notebooks}</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <FileText className="w-3 h-3" />
+                      <span>{stats.files}</span>
+                    </div>
+                  </>
+                );
+              })()}
+            </div>
+          </div>
+
           {/* Progress component under image */}
           {isSignedIn && typeof progress === 'number' && (
             <div className="px-4 py-1.5 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
@@ -162,19 +227,19 @@ export function MobileResponsiveCourseCard({
             </div>
           )}
 
-          {/* Content */}
-          <div className="p-4 flex flex-col">
-            <h3 className="font-semibold text-base text-gray-900 dark:text-white mb-2 line-clamp-2">
+          {/* Content - increased padding for more height */}
+          <div className="p-5 flex flex-col">
+            <h3 className="font-semibold text-base text-gray-900 dark:text-white mb-3 line-clamp-2">
               {course.title}
             </h3>
-            <div className="group/desc relative mb-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-3">
+            <div className="group/desc relative mb-5">
+              <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-3 text-justify leading-relaxed">
                 {course.description}
               </p>
               {/* Tooltip for full description */}
               {course.description && course.description.length > 100 && (
                 <div className="absolute bottom-full left-0 right-0 mb-2 bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-200 rounded-lg p-3 opacity-0 group-hover/desc:opacity-100 transition-opacity duration-300 pointer-events-none z-20 shadow-lg border border-gray-700 dark:border-gray-600 max-w-xs">
-                  <p className="text-xs leading-relaxed">
+                  <p className="text-xs leading-relaxed text-justify">
                     {course.description}
                   </p>
                   {/* Arrow pointing down */}
@@ -227,7 +292,7 @@ export function MobileResponsiveCourseCard({
       <div
         className={`bg-white dark:bg-gray-800 rounded-lg shadow-sm hover:shadow-md transition-all duration-200 border border-gray-200 dark:border-gray-700 overflow-hidden ${className}`}
       >
-        {/* Image */}
+        {/* Image - reverted to original size */}
         <div className="relative h-40 sm:h-48 overflow-hidden">
           {course.image ? (
             <Image
@@ -259,6 +324,39 @@ export function MobileResponsiveCourseCard({
           )}
         </div>
 
+        {/* Metadata under image */}
+        <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800/30">
+          <div className="flex items-center justify-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+            {(() => {
+              const stats = getCourseStats(course);
+              return (
+                <>
+                  <div className="flex items-center space-x-1">
+                    <LayoutGrid className="w-3 h-3" />
+                    <span>{stats.modules}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Library className="w-3 h-3" />
+                    <span>{stats.lessons}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Tv className="w-3 h-3" />
+                    <span>{stats.videos}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <Brackets className="w-3 h-3" />
+                    <span>{stats.notebooks}</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <FileText className="w-3 h-3" />
+                    <span>{stats.files}</span>
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+        </div>
+
         {/* Progress component under image */}
         {isSignedIn && typeof progress === 'number' && (
           <div className="px-4 py-1.5 bg-gray-50 dark:bg-gray-800/50 border-b border-gray-200 dark:border-gray-700">
@@ -266,19 +364,21 @@ export function MobileResponsiveCourseCard({
           </div>
         )}
 
-        {/* Content */}
+        {/* Content - increased padding for more height */}
         <div className="p-4 flex flex-col">
-          <h3 className="font-semibold text-sm text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+          <h3 className="font-semibold text-sm text-gray-900 dark:text-white mb-3 line-clamp-2 group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
             {course.title}
           </h3>
-          <div className="group/desc relative mb-3">
-            <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-3">
+          <div className="group/desc relative mb-4">
+            <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-3 text-justify leading-relaxed">
               {course.description}
             </p>
             {/* Tooltip for full description */}
             {course.description && course.description.length > 100 && (
               <div className="absolute bottom-full left-0 right-0 mb-2 bg-gray-900 dark:bg-gray-800 text-white dark:text-gray-200 rounded-lg p-3 opacity-0 group-hover/desc:opacity-100 transition-opacity duration-300 pointer-events-none z-20 shadow-lg border border-gray-700 dark:border-gray-600 max-w-xs">
-                <p className="text-xs leading-relaxed">{course.description}</p>
+                <p className="text-xs leading-relaxed text-justify">
+                  {course.description}
+                </p>
                 {/* Arrow pointing down */}
                 <div className="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900 dark:border-t-gray-800"></div>
               </div>

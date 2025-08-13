@@ -31,7 +31,7 @@ export function UnifiedCourseCard({
       className="group hover:no-underline block"
     >
       <div
-        className={`relative h-[580px] md:h-[585px] bg-gradient-to-bl from-card via-card to-card/80 rounded-xl sm:rounded-m overflow-hidden shadow-lg transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-primary/10 hover:translate-y-[-8px] border border-border/50 hover:border-primary/20 group-hover:bg-gradient-to-bl group-hover:from-card group-hover:via-card/95 group-hover:to-primary/5 ${className || ''}`}
+        className={`relative h-[580px] md:h-[585px] bg-gradient-to-bl from-card via-card to-card/80 rounded-sm sm:rounded-m overflow-hidden  transition-all duration-500 ease-out hover:translate-y-[-8px] border border-border/50 hover:border-primary/20 group-hover:bg-gradient-to-bl group-hover:from-card group-hover:via-card/95 group-hover:to-primary/5 ${className || ''}`}
       >
         {/* Floating background elements */}
         <div className="absolute inset-0 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -133,7 +133,7 @@ export function UnifiedCourseCard({
           {/* Description */}
           <div className="relative mb-4 sm:mb-6 flex-1 group">
             <div className="h-24 sm:h-26 overflow-hidden p-2 sm:p-3">
-              <p className="text-xs sm:text-sm text-muted-foreground/70 line-clamp-4">
+              <p className="text-xs sm:text-sm text-muted-foreground/70 line-clamp-5">
                 {course.description}
               </p>
             </div>

@@ -1,4 +1,15 @@
-import { BookOpen, Users, Award, Clock } from 'lucide-react';
+import {
+  BookOpen,
+  Users,
+  Award,
+  Clock,
+  Code,
+  FileText,
+  GraduationCap,
+  Brain,
+  Zap,
+  Globe,
+} from 'lucide-react';
 
 interface StatsSectionProps {
   coursesCount: number;
@@ -17,46 +28,60 @@ export function StatsSection({
     {
       icon: BookOpen,
       value: filteredCoursesCount,
-      label: 'courses available',
-      color: 'text-gray-600 dark:text-gray-400',
+      label: 'courses',
     },
     {
       icon: Award,
       value: categoriesCount,
       label: 'categories',
-      color: 'text-gray-600 dark:text-gray-400',
     },
     {
       icon: Users,
       value: instructorsCount,
       label: 'instructors',
-      color: 'text-gray-600 dark:text-gray-400',
     },
     {
       icon: Clock,
       value: coursesCount,
-      label: 'total courses',
-      color: 'text-gray-600 dark:text-gray-400',
+      label: 'Hours of Content',
     },
+  ];
+
+  const features = [
+    { icon: Code, label: 'Jupyter Extension' },
+    { icon: Globe, label: 'Google Colab' },
+    { icon: FileText, label: 'Multiple Media' },
+    { icon: GraduationCap, label: 'PhD Instructors' },
+    { icon: Brain, label: 'Quantum Computing' },
+    { icon: Zap, label: 'AI & ML' },
   ];
 
   return (
     <div className="mb-8 sm:mb-12">
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+      <div className="flex flex-wrap gap-2 sm:gap-3">
         {stats.map((stat, index) => (
           <div
             key={index}
-            className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-lg p-4 sm:p-6 text-center border border-gray-200/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-200 hover:-translate-y-1"
+            className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-sm border border-gray-300 dark:border-gray-600 flex items-center gap-2 text-sm"
           >
-            <stat.icon
-              className={`h-6 sm:h-8 w-6 sm:w-8 ${stat.color} mx-auto mb-2 sm:mb-3`}
-            />
-            <div className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">
-              {stat.value}
-            </div>
-            <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-              {stat.label}
-            </div>
+            <stat.icon className="h-4 w-4" />
+            <span className="font-semibold">{stat.value}</span>
+            <span className="text-xs opacity-80">{stat.label}</span>
+          </div>
+        ))}
+
+        {/* Subtle separator */}
+        <div className="flex items-center">
+          <div className="w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
+        </div>
+
+        {features.map((feature, index) => (
+          <div
+            key={`feature-${index}`}
+            className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-sm border border-gray-300 dark:border-gray-600 flex items-center gap-2 text-sm"
+          >
+            <feature.icon className="h-4 w-4" />
+            <span className="text-xs">{feature.label}</span>
           </div>
         ))}
       </div>

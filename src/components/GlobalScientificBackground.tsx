@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export function ScientificBackground() {
+export function GlobalScientificBackground() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [particlePositions, setParticlePositions] = useState<
     Array<{
@@ -35,7 +35,7 @@ export function ScientificBackground() {
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
       {/* Subtle grid lines */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
         <div

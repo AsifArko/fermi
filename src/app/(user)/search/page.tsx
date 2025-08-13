@@ -3,6 +3,7 @@ import { Search } from 'lucide-react';
 import { MobileResponsiveCourseCard } from '@/components/shared/MobileResponsiveCourseCard';
 import { Container } from '@/components/layout';
 import { SearchGrid } from '@/components/layout/MobileResponsiveGrid';
+import { EnhancedCourse } from '@/sanity/lib/courses/getCourses';
 
 interface SearchPageProps {
   searchParams: Promise<{
@@ -15,7 +16,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   if (!term) {
     return (
-      <div className="h-full pt-16">
+      <div className="h-full pt-16 relative z-10">
         <Container maxWidth="7xl" padding="lg">
           <div className="text-center py-12">
             <Search className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
@@ -30,10 +31,15 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   }
 
   const decodedTerm = decodeURIComponent(term);
-  const courses = await searchCourses(decodedTerm);
+  const allCourses = await searchCourses(decodedTerm);
+  // Filter out courses with null slugs and assert type
+  const courses = allCourses.filter(
+    (course: EnhancedCourse): course is EnhancedCourse & { slug: string } =>
+      course.slug !== null
+  );
 
   return (
-    <div className="h-full pt-16">
+    <div className="h-full pt-16 relative z-10">
       <Container maxWidth="7xl" padding="lg">
         <div className="flex items-center gap-4 mb-8">
           <Search className="h-8 w-8 text-primary" />
@@ -76,12 +82,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           </div>
         ) : (
           <SearchGrid className="pb-8 sm:pb-12">
-            {courses.map(course => (
+            {courses.map((course: EnhancedCourse & { slug: string }) => (
               <MobileResponsiveCourseCard
                 key={course._id}
                 course={course}
                 href={`/courses/${course.slug}`}
-                variant="default"
+                variant="featured"
               />
             ))}
           </SearchGrid>

@@ -37,7 +37,11 @@ export function MobileResponsiveCategoryFilter({
             variant={selectedCategory === null ? 'default' : 'outline'}
             size="sm"
             onClick={() => handleCategorySelect(null)}
-            className="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 hover:scale-105"
+            className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
+              selectedCategory === null
+                ? 'bg-gray-700 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl'
+                : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+            }`}
           >
             All Courses
           </Button>
@@ -49,7 +53,11 @@ export function MobileResponsiveCategoryFilter({
               variant={selectedCategory === category ? 'default' : 'outline'}
               size="sm"
               onClick={() => handleCategorySelect(category)}
-              className="px-4 py-2 text-sm font-medium rounded-full transition-all duration-200 hover:scale-105"
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 hover:scale-105 ${
+                selectedCategory === category
+                  ? 'bg-gray-700 hover:bg-gray-800 text-white shadow-lg hover:shadow-xl'
+                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
+              }`}
             >
               {category}
             </Button>
@@ -64,7 +72,7 @@ export function MobileResponsiveCategoryFilter({
           <Button
             variant="outline"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="w-full justify-between px-4 py-3 text-left font-medium"
+            className="w-full justify-between px-4 py-3 text-left font-medium border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
           >
             <span>
               {selectedCategory
@@ -86,7 +94,7 @@ export function MobileResponsiveCategoryFilter({
                 onClick={() => handleCategorySelect(null)}
                 className={`w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
                   selectedCategory === null
-                    ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                    ? 'bg-gray-700 text-white'
                     : 'text-gray-700 dark:text-gray-300'
                 }`}
               >
@@ -100,7 +108,7 @@ export function MobileResponsiveCategoryFilter({
                   onClick={() => handleCategorySelect(category)}
                   className={`w-full text-left px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
                     selectedCategory === category
-                      ? 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                      ? 'bg-gray-700 text-white'
                       : 'text-gray-700 dark:text-gray-300'
                   }`}
                 >

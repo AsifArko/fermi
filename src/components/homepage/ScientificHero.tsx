@@ -1,15 +1,8 @@
 'use client';
 
-import { ScientificBackground } from './ScientificBackground';
-import { FeatureBadges } from './FeatureBadges';
-import Link from 'next/link';
-
 export function ScientificHero() {
   return (
-    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
-      {/* Scientific Background */}
-      <ScientificBackground />
-
+    <section className="relative py-8 sm:py-12 lg:py-8 overflow-hidden">
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -27,26 +20,21 @@ export function ScientificHero() {
               Artificial Intelligence, Software Engineering, and more.
             </p>
 
-            {/* Feature Badges */}
-            <div className="flex flex-wrap gap-2">
-              <FeatureBadges />
-            </div>
-
             {/* Call to Action */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link
-                href="/courses"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-white bg-gray-700 hover:bg-gray-800 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl"
+              <button
+                onClick={() => (window.location.href = '/courses')}
+                className="inline-flex items-center justify-center px-6 h-10 text-sm font-semibold text-white bg-gray-700 hover:bg-gray-800 rounded-sm transition-all duration-200"
               >
                 Explore Courses
-              </Link>
+              </button>
 
-              <Link
-                href="/about"
-                className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold text-gray-700 dark:text-gray-300 border border-gray-600 dark:border-gray-400 rounded-lg hover:bg-gray-600 hover:text-white dark:hover:bg-gray-400 dark:hover:text-gray-900 transition-all duration-200"
+              <button
+                onClick={() => (window.location.href = '/about')}
+                className="inline-flex items-center justify-center px-6 h-10 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-sm transition-all duration-200"
               >
                 Learn More
-              </Link>
+              </button>
             </div>
           </div>
 

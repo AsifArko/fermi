@@ -60,7 +60,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-7xl mx-auto relative z-10">
       {/* Back to Courses Button - always visible below header */}
       <div className="pt-20 px-4 md:px-0">
         <Link

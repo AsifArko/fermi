@@ -3,6 +3,7 @@ import { Search, BookOpen, Sparkles } from 'lucide-react';
 import { MobileResponsiveCourseCard } from '@/components/shared/MobileResponsiveCourseCard';
 import { SearchGrid } from '@/components/layout/MobileResponsiveGrid';
 import Link from 'next/link';
+import { EnhancedCourse } from '@/sanity/lib/courses/getCourses';
 
 interface MobileResponsiveSearchPageProps {
   searchParams: Promise<{
@@ -64,7 +65,12 @@ export default async function MobileResponsiveSearchPage({
   }
 
   const decodedTerm = decodeURIComponent(term);
-  const courses = await searchCourses(decodedTerm);
+  const allCourses = await searchCourses(decodedTerm);
+  // Filter out courses with null slugs and assert type
+  const courses = allCourses.filter(
+    (course: EnhancedCourse): course is EnhancedCourse & { slug: string } =>
+      course.slug !== null
+  );
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-16">
@@ -189,7 +195,7 @@ export default async function MobileResponsiveSearchPage({
 
             {/* Course Grid */}
             <SearchGrid>
-              {courses.map(course => (
+              {courses.map((course: EnhancedCourse & { slug: string }) => (
                 <MobileResponsiveCourseCard
                   key={course._id}
                   course={course}
