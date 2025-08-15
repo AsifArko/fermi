@@ -1,6 +1,14 @@
-import { clerkMiddleware } from '@clerk/nextjs/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default clerkMiddleware();
+import { performanceMiddleware } from './middleware/performance';
+
+export default function middleware(request: NextRequest) {
+  // Apply performance monitoring first
+  performanceMiddleware(request);
+
+  // Return NextResponse.next() to continue with the request
+  return NextResponse.next();
+}
 
 export const config = {
   matcher: [

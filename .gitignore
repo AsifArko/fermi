@@ -47,3 +47,6 @@ next-env.d.ts
 
 # sanity
 /.sanity/
+
+# monitoring and analytics
+/logs/

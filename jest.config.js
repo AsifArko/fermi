@@ -15,6 +15,8 @@ const customJestConfig = {
     '!src/**/*.d.ts',
     '!src/**/*.stories.{js,jsx,ts,tsx}',
   ],
+  transformIgnorePatterns: ['node_modules/(?!(nanoid|@sanity|next-sanity)/)'],
+  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
 };
 
 module.exports = createJestConfig(customJestConfig);

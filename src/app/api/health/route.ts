@@ -31,7 +31,9 @@ async function checkSanityHealth() {
     // Add Sanity health check logic
     return { status: 'healthy', message: 'Sanity CMS is accessible' };
   } catch (error) {
-    return { status: 'unhealthy', message: error.message };
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    return { status: 'unhealthy', message: errorMessage };
   }
 }
 
@@ -40,7 +42,9 @@ async function checkStripeHealth() {
     // Add Stripe health check logic
     return { status: 'healthy', message: 'Stripe is accessible' };
   } catch (error) {
-    return { status: 'unhealthy', message: error.message };
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    return { status: 'unhealthy', message: errorMessage };
   }
 }
 
@@ -49,6 +53,8 @@ async function checkClerkHealth() {
     // Add Clerk health check logic
     return { status: 'healthy', message: 'Clerk is accessible' };
   } catch (error) {
-    return { status: 'unhealthy', message: error.message };
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+    return { status: 'unhealthy', message: errorMessage };
   }
 }
