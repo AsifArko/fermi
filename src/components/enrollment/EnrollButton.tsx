@@ -227,7 +227,7 @@ export function EnrollButton({
         className={cn('w-full', getButtonClasses(variant), className)}
       >
         <Link href='/sign-in'>
-          <Lock className='w-4 h-4 mr-2' />
+          {/* <Lock className='w-4 h-4 mr-2' /> */}
           Sign in to Enroll
         </Link>
       </Button>
