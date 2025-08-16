@@ -1,7 +1,7 @@
 'use client';
 
 import { useUser } from '@clerk/nextjs';
-import { CheckCircle, Loader2, Lock, XCircle } from 'lucide-react';
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, useTransition, useCallback } from 'react';
@@ -48,7 +48,6 @@ export function EnrollButton({
     canEnroll: false,
     accessLevel: 'none',
   });
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const loadEnrollmentState = useCallback(async () => {
     if (!user?.id) return;
@@ -94,9 +93,6 @@ export function EnrollButton({
   useEffect(() => {
     const paymentSuccess = searchParams.get('success');
     if (paymentSuccess === 'true' && user?.id) {
-      // Show success message
-      setShowSuccessMessage(true);
-
       // Try to refresh enrollment state
       loadEnrollmentState();
 
@@ -122,9 +118,6 @@ export function EnrollButton({
           }
         }
       }, 2000); // Wait 2 seconds for webhook to process
-
-      // Hide success message after 5 seconds
-      setTimeout(() => setShowSuccessMessage(false), 5000);
     }
   }, [
     searchParams,
@@ -226,10 +219,7 @@ export function EnrollButton({
         asChild
         className={cn('w-full', getButtonClasses(variant), className)}
       >
-        <Link href='/sign-in'>
-          {/* <Lock className='w-4 h-4 mr-2' /> */}
-          Sign in to Enroll
-        </Link>
+        <Link href='/sign-in'>Sign in to Enroll</Link>
       </Button>
     );
   }

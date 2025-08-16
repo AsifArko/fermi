@@ -256,7 +256,7 @@ export default function AssetManagerPage() {
 
   useEffect(() => {
     fetchAssets();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   const deleteAsset = async (assetId: string) => {
     try {

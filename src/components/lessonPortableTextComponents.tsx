@@ -1,6 +1,5 @@
 import { PortableTextComponents } from '@portabletext/react';
 import Image from 'next/image';
-import React from 'react';
 
 import { urlFor } from '@/sanity/lib/image';
 
