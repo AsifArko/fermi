@@ -1,7 +1,6 @@
 export { default as MetricCard } from './metric-card';
 export { default as Pagination } from './pagination';
 export { default as DashboardHeader } from './dashboard-header';
-export { DashboardFilters } from './dashboard-filters';
 export { default as OverviewTab } from './overview-tab';
 export { default as DataTable } from './data-table';
 export { default as PageViewsTab } from './page-views-tab';

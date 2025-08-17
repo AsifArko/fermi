@@ -295,7 +295,7 @@ export default function AssetManagerPage() {
           // Show success message
           const assetName = assetToDelete.originalFilename || 'Asset';
           setShowSuccessMessage(
-            `✅ ${assetName} deleted successfully from Sanity CDN`
+            `${assetName} deleted successfully from Sanity CDN`
           );
 
           // Auto-hide success message after 3 seconds
@@ -312,18 +312,18 @@ export default function AssetManagerPage() {
           error.message.includes('Insufficient permissions'))
       ) {
         alert(
-          '❌ Permission denied. Your SANITY_API_ADMIN_TOKEN needs "delete" and "update" permissions. Please check your token in Sanity project settings.'
+          'Permission denied. Your SANITY_API_ADMIN_TOKEN needs "delete" and "update" permissions. Please check your token in Sanity project settings.'
         );
       } else if (error instanceof Error && error.message.includes('404')) {
-        alert('❌ Asset not found. It may have already been deleted.');
+        alert('Asset not found. It may have already been deleted.');
       } else if (
         error instanceof Error &&
         error.message.includes('Asset deletion failed')
       ) {
-        alert('❌ Failed to delete asset from CDN. Please try again.');
+        alert('Failed to delete asset from CDN. Please try again.');
       } else {
         alert(
-          `❌ Failed to delete asset: ${error instanceof Error ? error.message : 'Unknown error'}`
+          `Failed to delete asset: ${error instanceof Error ? error.message : 'Unknown error'}`
         );
       }
     } finally {
@@ -888,7 +888,7 @@ export default function AssetManagerPage() {
                           confirmMessage += `This will permanently remove the ${assetType} from Sanity CDN.\n`;
 
                           if (refCount > 0) {
-                            confirmMessage += `⚠️  WARNING: This ${assetType} is referenced by ${refCount} lesson${refCount === 1 ? '' : 's'}.\n`;
+                            confirmMessage += `WARNING: This ${assetType} is referenced by ${refCount} lesson${refCount === 1 ? '' : ''}.\n`;
                             confirmMessage += `Deleting it may break those lessons.\n\n`;
                           }
 

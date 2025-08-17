@@ -67,7 +67,7 @@ export class SystemMetricsCollector implements MetricsCollector<SystemMetrics> {
       }
     }, this.config.interval);
 
-    console.log('🔄 Continuous system monitoring started');
+    console.log('Continuous system monitoring started');
   }
 
   private async gatherSystemMetrics(): Promise<SystemMetrics> {

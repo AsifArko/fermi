@@ -63,12 +63,9 @@ async function migrateEnrollments() {
           })
           .commit();
 
-        console.log(`✅ Migrated enrollment ${enrollment._id}`);
+        console.log(`Migrated enrollment ${enrollment._id}`);
       } catch (error) {
-        console.error(
-          `❌ Failed to migrate enrollment ${enrollment._id}:`,
-          error
-        );
+        console.error(`Failed to migrate enrollment ${enrollment._id}:`, error);
       }
     }
 
@@ -104,9 +101,9 @@ async function migrateStudents() {
           })
           .commit();
 
-        console.log(`✅ Migrated student ${student._id}`);
+        console.log(`Migrated student ${student._id}`);
       } catch (error) {
-        console.error(`❌ Failed to migrate student ${student._id}:`, error);
+        console.error(`Failed to migrate student ${student._id}:`, error);
       }
     }
 
@@ -169,7 +166,7 @@ async function validateMigration() {
  */
 async function runMigration() {
   try {
-    console.log('🚀 Starting enrollment system migration...\n');
+    console.log('Starting enrollment system migration...\n');
 
     // Run migrations
     await migrateEnrollments();
@@ -181,9 +178,9 @@ async function runMigration() {
     await validateMigration();
     console.log('');
 
-    console.log('🎉 Migration completed successfully!');
+    console.log('Migration completed successfully!');
   } catch (error) {
-    console.error('💥 Migration failed:', error);
+    console.error('Migration failed:', error);
     process.exit(1);
   }
 }

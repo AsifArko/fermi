@@ -116,12 +116,12 @@ export default function TestMonitoringPage() {
           </CardHeader>
           <CardContent className='space-y-2'>
             <div className='text-sm'>
-              <p>✅ Page views and navigation</p>
-              <p>✅ User interactions (clicks, scrolls)</p>
-              <p>✅ Form submissions</p>
-              <p>✅ Performance metrics</p>
-              <p>✅ Error tracking</p>
-              <p>✅ System health metrics</p>
+              <p>Page views and navigation</p>
+              <p>User interactions (clicks, scrolls)</p>
+              <p>Form submissions</p>
+              <p>Performance metrics</p>
+              <p>Error tracking</p>
+              <p>System health metrics</p>
             </div>
           </CardContent>
         </Card>

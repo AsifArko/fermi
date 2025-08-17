@@ -5,7 +5,6 @@ import { Box, Stack, Text } from '@sanity/ui';
 import React, { useState, useEffect, useCallback } from 'react';
 
 import ConversionsTab from './parts/conversions-tab';
-import { DashboardFilters } from './parts/dashboard-filters';
 import DashboardHeader from './parts/dashboard-header';
 import ErrorLogsTab from './parts/error-logs-tab';
 import OverviewTab from './parts/overview-tab';
@@ -30,14 +29,6 @@ interface AnalyticsData {
   conversionEvents: ConversionEvent[];
 }
 
-interface FilterState {
-  search: string;
-  dateRange: string;
-  eventType: string;
-  severity: string;
-  metricType: string;
-}
-
 interface PaginationState {
   pageViews: { current: number; itemsPerPage: number };
   userEvents: { current: number; itemsPerPage: number };
@@ -58,13 +49,7 @@ const AnalyticsDashboard: React.FC = () => {
   });
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [filters, setFilters] = useState<FilterState>({
-    search: '',
-    dateRange: '7d',
-    eventType: 'all',
-    severity: 'all',
-    metricType: 'all',
-  });
+  const [lastRefreshTime, setLastRefreshTime] = useState<Date>(new Date());
   const [pagination, setPagination] = useState<PaginationState>({
     pageViews: { current: 1, itemsPerPage: 5 },
     userEvents: { current: 1, itemsPerPage: 5 },
@@ -98,16 +83,6 @@ const AnalyticsDashboard: React.FC = () => {
         fetch('/api/monitoring/conversion-events').then(res => res.json()),
       ]);
 
-      // Debug logging
-      console.log('API Responses:', {
-        pageViews,
-        userEvents,
-        systemMetrics,
-        errorLogs,
-        performanceMetrics,
-        conversionEvents,
-      });
-
       setData({
         pageViews: pageViews.data || [],
         userEvents: userEvents.data || [],
@@ -116,6 +91,10 @@ const AnalyticsDashboard: React.FC = () => {
         performanceMetrics: performanceMetrics.data || [],
         conversionEvents: conversionEvents.data || [],
       });
+
+      if (isRefresh) {
+        setLastRefreshTime(new Date());
+      }
     } catch (error) {
       console.error('Error fetching analytics data:', error);
     } finally {
@@ -149,52 +128,17 @@ const AnalyticsDashboard: React.FC = () => {
     }));
   };
 
-  const filterData = (data: unknown[], type: string) => {
-    if (!Array.isArray(data)) {
-      return [];
-    }
-
-    return (data as Record<string, unknown>[]).filter(item => {
-      const matchesSearch =
-        !filters.search ||
-        JSON.stringify(item)
-          .toLowerCase()
-          .includes(filters.search.toLowerCase());
-
-      if (!matchesSearch) return false;
-
-      switch (type) {
-        case 'userEvents':
-          return (
-            filters.eventType === 'all' || item.eventType === filters.eventType
-          );
-        case 'errorLogs':
-          return (
-            filters.severity === 'all' || item.severity === filters.severity
-          );
-        case 'systemMetrics':
-          return (
-            filters.metricType === 'all' ||
-            item.metricType === filters.metricType
-          );
-        default:
-          return true;
-      }
-    });
-  };
-
   const getPaginatedData = (data: unknown[], tab: keyof PaginationState) => {
     if (!data || !Array.isArray(data)) {
       return { data: [], totalPages: 0 };
     }
 
-    const filteredData = filterData(data, tab);
     const { current, itemsPerPage } = pagination[tab];
     const startIndex = (current - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     return {
-      data: filteredData.slice(startIndex, endIndex),
-      totalPages: Math.ceil(filteredData.length / itemsPerPage),
+      data: data.slice(startIndex, endIndex),
+      totalPages: Math.ceil(data.length / itemsPerPage),
     };
   };
 
@@ -217,18 +161,12 @@ const AnalyticsDashboard: React.FC = () => {
       <DashboardHeader
         onRefresh={handleManualRefresh}
         refreshing={refreshing}
+        lastRefreshTime={lastRefreshTime}
       />
-
-      {/* Filters */}
-      <DashboardFilters filters={filters} onFiltersChange={setFilters} />
 
       {/* Analytics Tabs */}
       <Box padding={4}>
         <Stack space={4}>
-          <Text size={3} weight='bold'>
-            Analytics Dashboard
-          </Text>
-
           {/* Tab Navigation */}
           <Stack space={2}>
             <Text size={2} weight='semibold'>
@@ -242,12 +180,15 @@ const AnalyticsDashboard: React.FC = () => {
               Page Views
             </Text>
             <PageViewsTab
-              data={getPaginatedData(data.pageViews, 'pageViews').data}
-              currentPage={pagination.pageViews.current}
-              totalPages={
-                getPaginatedData(data.pageViews, 'pageViews').totalPages
+              data={
+                getPaginatedData(data.pageViews, 'pageViews').data as Record<
+                  string,
+                  unknown
+                >[]
               }
+              currentPage={pagination.pageViews.current}
               onPageChange={page => handlePageChange('pageViews', page)}
+              allData={(data.pageViews || []) as Record<string, unknown>[]}
             />
           </Stack>
 
@@ -256,12 +197,15 @@ const AnalyticsDashboard: React.FC = () => {
               User Events
             </Text>
             <UserEventsTab
-              data={getPaginatedData(data.userEvents, 'userEvents').data}
-              currentPage={pagination.userEvents.current}
-              totalPages={
-                getPaginatedData(data.userEvents, 'userEvents').totalPages
+              data={
+                getPaginatedData(data.userEvents, 'userEvents').data as Record<
+                  string,
+                  unknown
+                >[]
               }
+              currentPage={pagination.userEvents.current}
               onPageChange={page => handlePageChange('userEvents', page)}
+              allData={(data.userEvents || []) as Record<string, unknown>[]}
             />
           </Stack>
 
@@ -270,12 +214,13 @@ const AnalyticsDashboard: React.FC = () => {
               System Metrics
             </Text>
             <SystemMetricsTab
-              data={getPaginatedData(data.systemMetrics, 'systemMetrics').data}
-              currentPage={pagination.systemMetrics.current}
-              totalPages={
-                getPaginatedData(data.systemMetrics, 'systemMetrics').totalPages
+              data={
+                getPaginatedData(data.systemMetrics, 'systemMetrics')
+                  .data as Record<string, unknown>[]
               }
+              currentPage={pagination.systemMetrics.current}
               onPageChange={page => handlePageChange('systemMetrics', page)}
+              allData={(data.systemMetrics || []) as Record<string, unknown>[]}
             />
           </Stack>
 
@@ -284,12 +229,15 @@ const AnalyticsDashboard: React.FC = () => {
               Error Logs
             </Text>
             <ErrorLogsTab
-              data={getPaginatedData(data.errorLogs, 'errorLogs').data}
-              currentPage={pagination.errorLogs.current}
-              totalPages={
-                getPaginatedData(data.errorLogs, 'errorLogs').totalPages
+              data={
+                getPaginatedData(data.errorLogs, 'errorLogs').data as Record<
+                  string,
+                  unknown
+                >[]
               }
+              currentPage={pagination.errorLogs.current}
               onPageChange={page => handlePageChange('errorLogs', page)}
+              allData={(data.errorLogs || []) as Record<string, unknown>[]}
             />
           </Stack>
 
@@ -299,14 +247,14 @@ const AnalyticsDashboard: React.FC = () => {
             </Text>
             <PerformanceTab
               data={
-                getPaginatedData(data.performanceMetrics, 'performance').data
+                getPaginatedData(data.performanceMetrics, 'performance')
+                  .data as Record<string, unknown>[]
               }
               currentPage={pagination.performance.current}
-              totalPages={
-                getPaginatedData(data.performanceMetrics, 'performance')
-                  .totalPages
-              }
               onPageChange={page => handlePageChange('performance', page)}
+              allData={
+                (data.performanceMetrics || []) as Record<string, unknown>[]
+              }
             />
           </Stack>
 
@@ -315,13 +263,15 @@ const AnalyticsDashboard: React.FC = () => {
               Conversions
             </Text>
             <ConversionsTab
-              data={getPaginatedData(data.conversionEvents, 'conversions').data}
-              currentPage={pagination.conversions.current}
-              totalPages={
+              data={
                 getPaginatedData(data.conversionEvents, 'conversions')
-                  .totalPages
+                  .data as Record<string, unknown>[]
               }
+              currentPage={pagination.conversions.current}
               onPageChange={page => handlePageChange('conversions', page)}
+              allData={
+                (data.conversionEvents || []) as Record<string, unknown>[]
+              }
             />
           </Stack>
         </Stack>

@@ -34,14 +34,14 @@ export function initializeMonitoring() {
       typeof console !== 'undefined' &&
       process.env.NODE_ENV === 'development'
     ) {
-      console.log('🔍 Monitoring services initialized successfully');
-      console.log('🔄 System metrics collection started');
+      console.log('Monitoring services initialized successfully');
+      console.log('System metrics collection started');
     }
 
     return { basicMonitoring, enhancedMonitoring, systemCollector };
   } catch (error) {
     if (typeof console !== 'undefined') {
-      console.error('❌ Failed to initialize monitoring services:', error);
+      console.error('Failed to initialize monitoring services:', error);
     }
     return null;
   }

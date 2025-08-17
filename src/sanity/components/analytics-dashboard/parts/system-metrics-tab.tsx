@@ -1,85 +1,117 @@
 import React from 'react';
 
-import { Badge } from '@/components/ui/badge';
-
 import DataTable from './data-table';
 
 interface SystemMetricsTabProps {
   data: Record<string, unknown>[];
   currentPage: number;
-  totalPages: number;
   onPageChange: (page: number) => void;
+  allData: Record<string, unknown>[];
 }
 
 const SystemMetricsTab: React.FC<SystemMetricsTabProps> = ({
   data,
   currentPage,
-  totalPages,
   onPageChange,
+  allData,
 }) => {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString();
   };
 
-  const getMetricColor = (value: number, type: string) => {
-    if (type === 'cpu' || type === 'memory' || type === 'disk') {
-      if (value > 80) return 'destructive';
-      if (value > 60) return 'secondary';
-      return 'outline';
+  const formatValue = (value: unknown, unit: unknown) => {
+    const numValue = Number(value);
+    if (isNaN(numValue)) return String(value ?? '');
+
+    if (unit === 'percentage') {
+      return `${numValue.toFixed(1)}%`;
+    } else if (unit === 'bytes') {
+      return `${(numValue / 1024 / 1024).toFixed(2)} MB`;
+    } else if (unit === 'ms') {
+      return `${numValue.toFixed(2)}ms`;
     }
-    return 'outline';
+
+    return `${numValue} ${unit || ''}`;
+  };
+
+  const getStatusColor = (status: unknown) => {
+    const statusStr = String(status ?? '').toLowerCase();
+    switch (statusStr) {
+      case 'healthy':
+        return 'text-green-600';
+      case 'warning':
+        return 'text-yellow-600';
+      case 'critical':
+        return 'text-red-600';
+      default:
+        return 'text-gray-600';
+    }
   };
 
   const columns = [
     {
       key: 'metricType',
       label: 'Metric Type',
-      render: (value: unknown) => (
-        <Badge variant='outline'>{String(value ?? '')}</Badge>
-      ),
+      render: (
+        value: unknown,
+        _row: Record<string, unknown>,
+        _rowIndex: number
+      ) => <span className='font-medium text-xs'>{String(value ?? '')}</span>,
     },
     {
       key: 'value',
       label: 'Value',
-      render: (value: unknown) => String(value ?? ''),
+      render: (
+        value: unknown,
+        row: Record<string, unknown>,
+        _rowIndex: number
+      ) => (
+        <span className='font-mono text-xs'>
+          {formatValue(value, row.unit)}
+        </span>
+      ),
     },
     {
       key: 'unit',
       label: 'Unit',
-      render: (value: unknown) => String(value ?? ''),
+      render: (
+        value: unknown,
+        _row: Record<string, unknown>,
+        _rowIndex: number
+      ) => (
+        <span className='text-xs text-muted-foreground'>
+          {String(value ?? '')}
+        </span>
+      ),
     },
     {
       key: 'status',
       label: 'Status',
-      render: (_value: unknown, row: Record<string, unknown>) => {
-        const metricValue = Number(row.value ?? 0);
-        const metricType = String(row.metricType ?? '');
-        const status =
-          metricValue > 80
-            ? 'Critical'
-            : metricValue > 60
-              ? 'Warning'
-              : 'Normal';
-        return (
-          <Badge
-            variant={
-              getMetricColor(metricValue, metricType) as
-                | 'destructive'
-                | 'secondary'
-                | 'outline'
-            }
-          >
-            {status}
-          </Badge>
-        );
-      },
+      render: (
+        value: unknown,
+        _row: Record<string, unknown>,
+        _rowIndex: number
+      ) => (
+        <span className={`text-xs font-medium ${getStatusColor(value)}`}>
+          {String(value ?? '')}
+        </span>
+      ),
     },
     {
       key: 'timestamp',
       label: 'Timestamp',
-      render: (value: unknown) => formatDate(String(value ?? '')),
+      render: (
+        value: unknown,
+        _row: Record<string, unknown>,
+        _rowIndex: number
+      ) => formatDate(String(value ?? '')),
     },
   ];
+
+  const filters = {
+    search: true,
+    dateRange: true,
+  };
 
   return (
     <DataTable
@@ -88,8 +120,9 @@ const SystemMetricsTab: React.FC<SystemMetricsTabProps> = ({
       data={data}
       columns={columns}
       currentPage={currentPage}
-      totalPages={totalPages}
       onPageChange={onPageChange}
+      allData={allData}
+      filters={filters}
     />
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Text, Stack, Button, Box, Flex, Grid } from '@sanity/ui';
+import { Card, Text, Stack, Box, Flex, Grid } from '@sanity/ui';
+import { Button } from '@/components/ui/button';
 import {
   Activity,
   Users,
@@ -9,7 +10,7 @@ import {
   Clock,
   Monitor,
   BarChart3,
-  Zap,
+  RefreshCw,
 } from 'lucide-react';
 import { SystemHealth } from './system-health';
 import { TrafficOverview } from './traffic-overview';
@@ -30,18 +31,6 @@ const dashboardStyles = `
     }
   }
 
-  @keyframes pulse {
-    0% {
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-    }
-    70% {
-      box-shadow: 0 0 0 10px rgba(34, 197, 94, 0);
-    }
-    100% {
-      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-    }
-  }
-
   @keyframes slideIn {
     from {
       opacity: 0;
@@ -58,41 +47,15 @@ const dashboardStyles = `
   }
 
   .metric-card {
-    transition: all 0.3s ease;
     animation: slideIn 0.4s ease-out;
-  }
-
-  .metric-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   }
 
   .progress-bar {
     transition: width 0.8s ease-out, background-color 0.3s ease;
   }
 
-  .live-indicator {
-    animation: pulse 2s infinite;
-  }
-
-  .refresh-button {
-    transition: all 0.2s ease;
-  }
-
-  .refresh-button:hover {
-    transform: scale(1.05);
-  }
-
   .data-value {
     transition: color 0.3s ease;
-  }
-
-  .status-badge {
-    transition: all 0.2s ease;
-  }
-
-  .status-badge:hover {
-    transform: scale(1.05);
   }
 `;
 
@@ -128,13 +91,16 @@ export function MonitoringDashboard() {
   );
   const [trafficStats, setTrafficStats] = useState<TrafficStats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [refreshKey, setRefreshKey] = useState(0);
   const [metadataRefreshKey, setMetadataRefreshKey] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [lastRefreshTime, setLastRefreshTime] = useState<Date>(new Date());
 
   const refreshData = () => {
     setRefreshKey(prev => prev + 1);
     setError(null);
+    setRefreshing(true);
   };
 
   const refreshMetadataOnly = () => {
@@ -183,10 +149,13 @@ export function MonitoringDashboard() {
             geographicBreakdown: traffic.data.geographicBreakdown || {},
           });
         }
+
+        setLastRefreshTime(new Date());
       } catch (error) {
         setError('Failed to load monitoring data. Please try again later.');
       } finally {
         setLoading(false);
+        setRefreshing(false);
       }
     };
 
@@ -232,12 +201,16 @@ export function MonitoringDashboard() {
     }
   }, [metadataRefreshKey]);
 
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString();
+  };
+
   if (loading || !dashboardStats) {
     return (
       <div className='flex items-center justify-center h-64'>
         <div className='flex items-center space-x-3'>
-          <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-primary'></div>
-          <span className='text-sm text-muted-foreground'>
+          <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-gray-400'></div>
+          <span className='text-sm text-gray-600'>
             Loading monitoring data...
           </span>
         </div>
@@ -254,12 +227,12 @@ export function MonitoringDashboard() {
           </div>
           <div className='text-gray-600'>{error}</div>
           <Button
-            mode='ghost'
-            icon={Zap}
-            text='Retry'
             onClick={refreshData}
-            className='refresh-button'
-          />
+            className='flex items-center justify-center gap-2 px-4 py-2'
+          >
+            <RefreshCw className='h-4 w-4' />
+            <span>Retry</span>
+          </Button>
         </div>
       </div>
     );
@@ -277,28 +250,35 @@ export function MonitoringDashboard() {
           {/* Header */}
           <Card
             padding={4}
-            radius={3}
-            shadow={1}
-            tone='primary'
+            radius={2}
+            tone='default'
             className='metric-card'
+            style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}
           >
             <Flex align='center' justify='space-between'>
               <Stack space={3}>
-                <Text size={3} weight='bold'>
+                <Text size={3} weight='bold' style={{ color: '#1e293b' }}>
                   System Monitoring Dashboard
                 </Text>
-                <Text size={1} muted>
+                <Text size={1} style={{ color: '#64748b' }}>
                   Real-time system health and traffic analytics
                 </Text>
+                {lastRefreshTime && (
+                  <Text size={0} style={{ color: '#94a3b8' }}>
+                    Last updated: {formatTime(lastRefreshTime)}
+                  </Text>
+                )}
               </Stack>
               <Button
-                mode='ghost'
-                icon={Zap}
-                text='Refresh'
                 onClick={refreshData}
-                disabled={loading}
-                className='refresh-button'
-              />
+                disabled={refreshing}
+                className='flex items-center justify-center gap-2 px-4 py-2'
+              >
+                <RefreshCw
+                  className={`h-4 w-4 ${refreshing ? 'animate-spin' : 'hover:rotate-180 transition-transform duration-300'}`}
+                />
+                <span>Refresh</span>
+              </Button>
             </Flex>
           </Card>
 
@@ -306,19 +286,27 @@ export function MonitoringDashboard() {
           <Grid columns={[1, 2, 4]} gap={3}>
             <Card
               padding={3}
-              radius={3}
-              shadow={1}
-              tone='positive'
+              radius={2}
+              tone='default'
               className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
             >
               <Stack space={2}>
                 <Flex align='center' gap={2}>
-                  <Activity size={16} />
-                  <Text size={1} weight='semibold'>
+                  <Activity size={16} style={{ color: '#64748b' }} />
+                  <Text size={1} weight='semibold' style={{ color: '#475569' }}>
                     Uptime
                   </Text>
                 </Flex>
-                <Text size={3} weight='bold' className='data-value'>
+                <Text
+                  size={3}
+                  weight='bold'
+                  className='data-value'
+                  style={{ color: '#1e293b' }}
+                >
                   {dashboardStats?.uptime !== undefined
                     ? `${dashboardStats.uptime.toFixed(2)}%`
                     : 'N/A'}
@@ -328,19 +316,27 @@ export function MonitoringDashboard() {
 
             <Card
               padding={3}
-              radius={3}
-              shadow={1}
-              tone='caution'
+              radius={2}
+              tone='default'
               className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
             >
               <Stack space={2}>
                 <Flex align='center' gap={2}>
-                  <Users size={16} />
-                  <Text size={1} weight='semibold'>
+                  <Users size={16} style={{ color: '#64748b' }} />
+                  <Text size={1} weight='semibold' style={{ color: '#475569' }}>
                     Active Users
                   </Text>
                 </Flex>
-                <Text size={3} weight='bold' className='data-value'>
+                <Text
+                  size={3}
+                  weight='bold'
+                  className='data-value'
+                  style={{ color: '#1e293b' }}
+                >
                   {dashboardStats?.activeUsers || 0}
                 </Text>
               </Stack>
@@ -348,19 +344,27 @@ export function MonitoringDashboard() {
 
             <Card
               padding={3}
-              radius={3}
-              shadow={1}
-              tone='primary'
+              radius={2}
+              tone='default'
               className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
             >
               <Stack space={2}>
                 <Flex align='center' gap={2}>
-                  <Eye size={16} />
-                  <Text size={1} weight='semibold'>
+                  <Eye size={16} style={{ color: '#64748b' }} />
+                  <Text size={1} weight='semibold' style={{ color: '#475569' }}>
                     Total Requests
                   </Text>
                 </Flex>
-                <Text size={3} weight='bold' className='data-value'>
+                <Text
+                  size={3}
+                  weight='bold'
+                  className='data-value'
+                  style={{ color: '#1e293b' }}
+                >
                   {typeof dashboardStats?.totalRequests === 'number'
                     ? dashboardStats.totalRequests.toLocaleString()
                     : '0'}
@@ -370,19 +374,27 @@ export function MonitoringDashboard() {
 
             <Card
               padding={3}
-              radius={3}
-              shadow={1}
-              tone='critical'
+              radius={2}
+              tone='default'
               className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
             >
               <Stack space={2}>
                 <Flex align='center' gap={2}>
-                  <AlertTriangle size={16} />
-                  <Text size={1} weight='semibold'>
+                  <AlertTriangle size={16} style={{ color: '#64748b' }} />
+                  <Text size={1} weight='semibold' style={{ color: '#475569' }}>
                     Error Rate
                   </Text>
                 </Flex>
-                <Text size={3} weight='bold' className='data-value'>
+                <Text
+                  size={3}
+                  weight='bold'
+                  className='data-value'
+                  style={{ color: '#1e293b' }}
+                >
                   {dashboardStats?.errorRate !== undefined
                     ? `${dashboardStats.errorRate.toFixed(2)}%`
                     : '0%'}
@@ -394,11 +406,19 @@ export function MonitoringDashboard() {
           {/* Main Content Grid */}
           <Grid columns={[1, 2]} gap={4}>
             {/* System Health */}
-            <Card padding={4} radius={3} shadow={1} className='metric-card'>
+            <Card
+              padding={4}
+              radius={2}
+              className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
+            >
               <Stack space={4}>
                 <Flex align='center' gap={2}>
-                  <Monitor size={20} />
-                  <Text size={2} weight='semibold'>
+                  <Monitor size={20} style={{ color: '#64748b' }} />
+                  <Text size={2} weight='semibold' style={{ color: '#475569' }}>
                     System Health
                   </Text>
                 </Flex>
@@ -411,11 +431,19 @@ export function MonitoringDashboard() {
             </Card>
 
             {/* Real-time Stats */}
-            <Card padding={4} radius={3} shadow={1} className='metric-card'>
+            <Card
+              padding={4}
+              radius={2}
+              className='metric-card'
+              style={{
+                backgroundColor: '#f8fafc',
+                border: '1px solid #e2e8f0',
+              }}
+            >
               <Stack space={4}>
                 <Flex align='center' gap={2}>
-                  <Clock size={20} />
-                  <Text size={2} weight='semibold'>
+                  <Clock size={20} style={{ color: '#64748b' }} />
+                  <Text size={2} weight='semibold' style={{ color: '#475569' }}>
                     Real-time Activity
                   </Text>
                 </Flex>
@@ -425,11 +453,16 @@ export function MonitoringDashboard() {
           </Grid>
 
           {/* Traffic Overview */}
-          <Card padding={4} radius={3} shadow={1} className='metric-card'>
+          <Card
+            padding={4}
+            radius={2}
+            className='metric-card'
+            style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}
+          >
             <Stack space={4}>
               <Flex align='center' gap={2}>
-                <BarChart3 size={20} />
-                <Text size={2} weight='semibold'>
+                <BarChart3 size={20} style={{ color: '#64748b' }} />
+                <Text size={2} weight='semibold' style={{ color: '#475569' }}>
                   Traffic Overview
                 </Text>
               </Flex>
@@ -452,11 +485,16 @@ export function MonitoringDashboard() {
           </Card>
 
           {/* Performance Metrics */}
-          <Card padding={4} radius={3} shadow={1} className='metric-card'>
+          <Card
+            padding={4}
+            radius={2}
+            className='metric-card'
+            style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}
+          >
             <Stack space={4}>
               <Flex align='center' gap={2}>
-                <TrendingUp size={20} />
-                <Text size={2} weight='semibold'>
+                <TrendingUp size={20} style={{ color: '#64748b' }} />
+                <Text size={2} weight='semibold' style={{ color: '#475569' }}>
                   Performance Metrics
                 </Text>
               </Flex>
@@ -465,11 +503,16 @@ export function MonitoringDashboard() {
           </Card>
 
           {/* Error Logs */}
-          <Card padding={4} radius={3} shadow={1} className='metric-card'>
+          <Card
+            padding={4}
+            radius={2}
+            className='metric-card'
+            style={{ backgroundColor: '#f8fafc', border: '1px solid #e2e8f0' }}
+          >
             <Stack space={4}>
               <Flex align='center' gap={2}>
-                <AlertTriangle size={20} />
-                <Text size={2} weight='semibold'>
+                <AlertTriangle size={20} style={{ color: '#64748b' }} />
+                <Text size={2} weight='semibold' style={{ color: '#475569' }}>
                   Recent Errors
                 </Text>
               </Flex>

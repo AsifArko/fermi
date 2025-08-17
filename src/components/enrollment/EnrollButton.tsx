@@ -1,6 +1,6 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
+import { useUser, SignInButton } from '@clerk/nextjs';
 import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -193,7 +193,7 @@ export function EnrollButton({
         disabled
         className={cn('w-full relative', getButtonClasses(variant), className)}
       >
-        <Loader2 className='w-4 h-4 animate-spin mr-2' />
+        <Loader2 className='w-4 h-4 animate-spin mr-1' />
         Loading...
       </Button>
     );
@@ -206,7 +206,7 @@ export function EnrollButton({
         disabled
         className={cn('w-full relative', getButtonClasses(variant), className)}
       >
-        <Loader2 className='w-4 h-4 animate-spin mr-2' />
+        <Loader2 className='w-4 h-4 animate-spin mr-1' />
         Checking enrollment...
       </Button>
     );
@@ -215,12 +215,11 @@ export function EnrollButton({
   // Show sign-in prompt for unauthenticated users
   if (!user?.id) {
     return (
-      <Button
-        asChild
-        className={cn('w-full', getButtonClasses(variant), className)}
-      >
-        <Link href='/sign-in'>Sign in to Enroll</Link>
-      </Button>
+      <SignInButton mode='modal'>
+        <Button className={cn('w-full', getButtonClasses(variant), className)}>
+          Sign in to Enroll
+        </Button>
+      </SignInButton>
     );
   }
 
@@ -253,7 +252,7 @@ export function EnrollButton({
           )}
         >
           <Link href={`/dashboard/courses/${courseId}`}>
-            <CheckCircle className='w-4 h-4 mr-2' />
+            <CheckCircle className='w-4 h-4 mr-1' />
             View Course
           </Link>
         </Button>
@@ -274,7 +273,7 @@ export function EnrollButton({
             className
           )}
         >
-          <Loader2 className='w-4 h-4 mr-2 animate-spin' />
+          <Loader2 className='w-4 h-4 mr-1 animate-spin' />
           Enrollment Pending
         </Button>
         <EnrollmentStatusBadge status='pending' />
@@ -295,7 +294,7 @@ export function EnrollButton({
             className
           )}
         >
-          <CheckCircle className='w-4 h-4 mr-2' />
+          <CheckCircle className='w-4 h-4 mr-1' />
           Re-enroll
         </Button>
         <EnrollmentStatusBadge status='cancelled' />
@@ -318,12 +317,12 @@ export function EnrollButton({
         >
           {isPending ? (
             <>
-              <Loader2 className='w-4 h-4 mr-2 animate-spin' />
+              <Loader2 className='w-4 h-4 mr-1 animate-spin' />
               Processing...
             </>
           ) : (
             <>
-              <CheckCircle className='w-4 h-4 mr-2' />
+              <CheckCircle className='w-4 h-4 mr-1' />
               {coursePrice === 0 ? 'Enroll Free' : `Enroll for $${coursePrice}`}
             </>
           )}
@@ -342,7 +341,7 @@ export function EnrollButton({
         className
       )}
     >
-      <XCircle className='w-4 h-4 mr-2' />
+      <XCircle className='w-4 h-4 mr-1' />
       Enrollment Unavailable
     </Button>
   );
@@ -356,6 +355,6 @@ function getButtonClasses(variant: 'default' | 'compact' | 'hero') {
     case 'hero':
       return 'h-14 px-8 text-lg font-semibold shadow-lg hover:shadow-xl transition-shadow';
     default:
-      return 'h-12 px-6 text-base';
+      return 'h-11 px-6 text-xs';
   }
 }

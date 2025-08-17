@@ -133,7 +133,7 @@ export default defineType({
     },
     prepare(value) {
       const { title, subtitle, errorType, severity, resolved } = value;
-      const status = resolved ? '✅ Resolved' : '❌ Open';
+      const status = resolved ? 'Resolved' : 'Open';
       return {
         title: title || 'Unknown Error',
         subtitle: `${new Date(subtitle).toLocaleString()} - ${errorType} (${severity}) - ${status}`,
