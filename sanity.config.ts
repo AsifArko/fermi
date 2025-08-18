@@ -20,7 +20,14 @@ export default defineConfig({
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
   plugins: [
-    structureTool({ structure }),
+    structureTool({
+      structure,
+      // Prevent deep nesting issues
+      defaultDocumentNode: (S, { schemaType }) => {
+        // Use a simple document form for all types to prevent complex navigation
+        return S.document().schemaType(schemaType);
+      },
+    }),
     presentationTool({
       previewUrl: {
         // initial: "localhost:3000",
@@ -36,6 +43,17 @@ export default defineConfig({
     // https://www.sanity.io/docs/the-vision-plugin
     visionTool({ defaultApiVersion: apiVersion }),
   ],
+
+  // Improve performance and prevent URL issues
+  document: {
+    // Prevent complex nested editing that can cause URL issues
+    newDocumentOptions: (prev, { creationContext }) => {
+      if (creationContext.type === 'global') {
+        return prev.filter(option => option.templateId !== 'course');
+      }
+      return prev;
+    },
+  },
 
   beta: {
     create: {

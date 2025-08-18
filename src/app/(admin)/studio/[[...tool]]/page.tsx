@@ -19,8 +19,10 @@ export default function StudioPage() {
   return (
     <NextStudio
       config={config}
-      // Help prevent filename length issues
+      // Help prevent filename length issues and improve stability
       unstable_noAuthBoundary={false}
+      // Add error boundary for better error handling
+      unstable_globalStyles={false}
     />
   );
 }
